@@ -4,7 +4,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Irfan Fitrat | The World of Irfan Fitrat</title>
+
+<title>Irfan Fitrat | Pakistani Businessman Connecting Pakistan, UAE & Global Opportunities</title>
+
+<meta name="description" content="Irfan Fitrat is a Pakistani businessman and self-made entrepreneur connecting talent, capital and opportunities between Pakistan, UAE and the world through TAWAJA, IRFANA and strategic investments.">
+<meta name="keywords" content="Irfan Fitrat, Pakistani businessman, investment opportunities Pakistan, UAE business, TAWAJA, IRFANA, Pakistan agriculture, handicrafts, import export, self made entrepreneur">
+<meta name="author" content="Irfan Fitrat">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Irfan Fitrat | Connecting Pakistan, UAE & Global Opportunities">
+<meta property="og:description" content="Pakistani businessman and entrepreneur building bridges between talent, capital and opportunity across Pakistan, UAE and the world.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://irfanfitrat.com">
+<meta property="og:image" content="https://irfanfitrat.com/irfan-fitrat-pakistani-businessman.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Irfan Fitrat | Connecting Pakistan, UAE & Global Opportunities">
+<meta name="twitter:description" content="Pakistani businessman connecting talent and opportunity between Pakistan, UAE and the world.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +40,6 @@
   --soft: #f5f5f2;
   --grey: #777777;
   --line: #dddddd;
-  --green: #315c43;
-  --blue: #0d3558;
 }
 
 * {
@@ -92,7 +108,6 @@ header {
   z-index: 1000;
   background: rgba(255, 255, 255, .72);
   backdrop-filter: blur(18px);
-  transition: background .4s ease;
 }
 
 .logo img {
@@ -485,14 +500,14 @@ nav a:hover { color: #111; }
 
 .opportunity-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
   margin-top: 80px;
 }
 
 .opportunity-card {
   background: white;
-  padding: 44px 36px;
+  padding: 48px 40px;
   border: 1px solid transparent;
   transition: border-color .35s ease, transform .35s ease;
   text-decoration: none;
@@ -502,17 +517,17 @@ nav a:hover { color: #111; }
 
 .opportunity-card:hover {
   border-color: #ddd;
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 .opportunity-card h3 {
   font-size: 28px;
   font-weight: 300;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .opportunity-card p {
-  font-size: 15px;
+  font-size: 16px;
   color: #555;
   line-height: 1.7;
 }
@@ -626,7 +641,7 @@ footer {
   height: 48px;
 }
 
-/* WHATSAPP FLOATING BUTTON */
+/* WHATSAPP */
 .whatsapp-float {
   position: fixed;
   bottom: 32px;
@@ -680,7 +695,7 @@ footer {
   }
 
   .opportunity-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .world-card, .venture { padding: 0; }
@@ -753,7 +768,6 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .opportunity-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 36px; }
   .loader h1 { font-size: 20px; letter-spacing: .35em; }
 }
@@ -773,8 +787,10 @@ footer {
 <!-- NAVIGATION -->
 <header>
   <div class="logo">
-    <img src="logo.svg" alt="Irfan Fitrat" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-    <span style="display:none; font-size:16px; font-weight:500; letter-spacing:.28em;">IRFAN FITRAT</span>
+    <a href="index.html">
+      <img src="irfan-fitrat-logo.svg" alt="Irfan Fitrat Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span style="display:none; font-size:16px; font-weight:500; letter-spacing:.28em;">IRFAN FITRAT</span>
+    </a>
   </div>
   <button class="menu-toggle" aria-label="Menu">
     <span></span>
@@ -785,12 +801,12 @@ footer {
     <a href="#world">World</a>
     <a href="#bridge">Mission</a>
     <a href="#ventures">Ventures</a>
-    <a href="#opportunity">Opportunities</a>
+    <a href="invest.html">Invest</a>
     <a href="#contact">Connect</a>
   </nav>
 </header>
 
-<!-- ACT I — HERO -->
+<!-- HERO -->
 <section class="hero">
   <div id="earth-container"></div>
   <div class="hero-content">
@@ -806,14 +822,14 @@ footer {
   </div>
 </section>
 
-<!-- ACT I TRANSITION -->
+<!-- IDEA -->
 <section class="idea">
   <h2>What if geography never decided who gets the opportunity?</h2>
 </section>
 
-<!-- ACT II — THE WORLD -->
+<!-- WORLD -->
 <section class="world" id="world">
-  <div class="section-title">Act II — The World</div>
+  <div class="section-title">The World</div>
   <h2>
     Two ecosystems.<br>
     One possibility.
@@ -825,9 +841,9 @@ footer {
   </p>
 
   <div class="world-grid">
-    <div class="world-card pakistan">
+    <div class="world-card">
       <div class="image-frame">
-        <video src="pakistan.mp4" autoplay muted loop playsinline></video>
+        <video src="pakistan-northern-mountains-talent.mp4" autoplay muted loop playsinline></video>
         <div class="image-overlay"><span>Pakistan</span></div>
       </div>
       <div class="card-body">
@@ -844,9 +860,9 @@ footer {
       </div>
     </div>
 
-    <div class="world-card dubai">
+    <div class="world-card">
       <div class="image-frame">
-        <video src="dubai.mp4" autoplay muted loop playsinline></video>
+        <video src="dubai-skyline-global-business-hub.mp4" autoplay muted loop playsinline></video>
         <div class="image-overlay"><span>Dubai</span></div>
       </div>
       <div class="card-body">
@@ -865,10 +881,10 @@ footer {
   </div>
 </section>
 
-<!-- ACT III — THE BRIDGE -->
+<!-- BRIDGE -->
 <section class="bridge" id="bridge">
   <div class="bridge-content">
-    <div class="section-title">Act III — The Bridge</div>
+    <div class="section-title">The Bridge</div>
     <h2>I believe geography should never limit opportunity.</h2>
     <p>
       My mission is to connect people, businesses, and ideas across borders so that great opportunities can reach anyone, anywhere.
@@ -876,12 +892,12 @@ footer {
     <div class="signature">Irfan Fitrat</div>
   </div>
   <div class="portrait">
-    <img src="irfan.jpg" alt="Irfan Fitrat">
+    <img src="irfan-fitrat-pakistani-businessman.jpg" alt="Irfan Fitrat - Pakistani businessman and self-made entrepreneur connecting Pakistan UAE and global opportunities">
   </div>
 </section>
 
-<!-- THE PHILOSOPHY -->
-<section class="philosophy" id="philosophy">
+<!-- PHILOSOPHY -->
+<section class="philosophy">
   <div class="section-title">The Philosophy</div>
   <h2>
     Borders divide geography.<br>
@@ -893,25 +909,23 @@ footer {
   </p>
 </section>
 
-<!-- ACT IV — VENTURES -->
+<!-- VENTURES -->
 <section class="ventures" id="ventures">
-  <div class="section-title">Act IV — The Manifestation</div>
+  <div class="section-title">Ventures</div>
   <h2>Ideas become reality.</h2>
   <p class="lead">
     Every venture is a different expression of one mission: creating connections that create value.
   </p>
 
   <div class="venture-grid">
-
-    <!-- TAWAJA -->
     <div class="venture">
       <div class="venture-bg">
-        <video src="tawaja-bg.mp4" autoplay muted loop playsinline></video>
+        <video src="tawaja-digital-growth-brand-systems.mp4" autoplay muted loop playsinline></video>
       </div>
       <div class="venture-overlay"></div>
       <div class="venture-content">
         <div class="venture-logo">
-          <img src="tawaja-logo.png" alt="TAWAJA">
+          <img src="tawaja-logo.png" alt="TAWAJA Logo - Digital Growth and Brand Systems">
         </div>
         <h3>TAWAJA</h3>
         <span>Digital Growth & Brand Systems</span>
@@ -921,15 +935,14 @@ footer {
       </div>
     </div>
 
-    <!-- IRFANA -->
     <div class="venture">
       <div class="venture-bg">
-        <video src="irfana-bg.mp4" autoplay muted loop playsinline></video>
+        <video src="irfana-culture-craftsmanship-design.mp4" autoplay muted loop playsinline></video>
       </div>
       <div class="venture-overlay"></div>
       <div class="venture-content">
         <div class="venture-logo">
-          <img src="irfana-logo.png" alt="IRFANA">
+          <img src="irfana-logo.png" alt="IRFANA Logo - Culture Craftsmanship and Design">
         </div>
         <h3>IRFANA</h3>
         <span>A future expression of culture, craftsmanship and design</span>
@@ -938,44 +951,37 @@ footer {
         </p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ACT V — OPPORTUNITY -->
+<!-- OPPORTUNITY -->
 <section class="opportunity" id="opportunity">
-  <div class="section-title">Act V — Opportunity</div>
+  <div class="section-title">Opportunity</div>
   <h2>Where do you want to go?</h2>
 
   <div class="opportunity-grid">
 
-    <!-- INVEST → now links to invest.html -->
     <a href="invest.html" class="opportunity-card">
-      <h3>Invest</h3>
-      <p>Explore opportunities across emerging markets and growing industries.</p>
+      <h3>Invest & Build</h3>
+      <p>Partner with me to invest capital and create meaningful businesses, projects and opportunities across Pakistan and the UAE.</p>
     </a>
 
     <div class="opportunity-card">
       <h3>Source</h3>
-      <p>Connect with manufacturers, suppliers, and production partners.</p>
+      <p>Connect with manufacturers, suppliers, and production partners in Pakistan.</p>
     </div>
 
     <div class="opportunity-card">
       <h3>Explore</h3>
-      <p>Visit Pakistan or the UAE. See the ecosystems, meet the people, understand the possibility.</p>
-    </div>
-
-    <div class="opportunity-card">
-      <h3>Build</h3>
-      <p>Create partnerships, businesses, and ideas across borders.</p>
+      <p>Visit Pakistan or the UAE. See the ecosystems, meet the people, and understand the real opportunity.</p>
     </div>
 
   </div>
 </section>
 
-<!-- ACT VI — THE INVITATION -->
+<!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="section-title">Act VI — The Invitation</div>
+  <div class="section-title">The Invitation</div>
   <h2>Let’s build something meaningful.</h2>
   <p>
     The strongest opportunities begin with a simple conversation. Whether you have an idea, a partnership, or a vision to explore — the door is open.
@@ -1006,7 +1012,7 @@ footer {
   </footer>
 </section>
 
-<!-- WHATSAPP FLOATING BUTTON -->
+<!-- WHATSAPP -->
 <a href="https://wa.me/971521712008" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.128 6.744 3.046 9.378L1.06 30.94l5.686-1.948A15.91 15.91 0 0 0 16.004 32C24.826 32 32 24.824 32 16.004 32 7.176 24.826 0 16.004 0zm8.612 22.61c-.36.996-1.782 1.822-2.918 2.066-.776.164-1.788.294-5.196-.996-4.36-1.654-7.168-6.72-7.386-7.03-.21-.31-1.74-2.316-1.74-4.42 0-2.104 1.106-3.14 1.498-3.566.36-.392.976-.54 1.3-.54.316 0 .64.004.92.016.296.014.694-.112 1.084.826.4.96 1.36 3.32 1.48 3.56.12.24.2.52.04.84-.16.32-.24.52-.48.8-.24.28-.504.624-.72.84-.24.24-.49.5-.21.98.28.48 1.24 2.048 2.664 3.316 1.832 1.632 3.376 2.14 3.856 2.38.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.8 1.32 3.28 1.56.48.24.8.36.92.56.12.2.12 1.14-.24 2.136z"/>
