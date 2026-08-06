@@ -174,14 +174,14 @@ nav a:hover { color: #111; }
 .category-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  gap: 32px;
 }
 
 .category-card {
   border: 1px solid var(--line);
-  padding: 48px 40px;
-  transition: border-color 0.35s ease, transform 0.35s ease;
+  overflow: hidden;
   background: white;
+  transition: border-color 0.35s ease, transform 0.35s ease;
 }
 
 .category-card:hover {
@@ -189,44 +189,67 @@ nav a:hover { color: #111; }
   transform: translateY(-4px);
 }
 
-.category-card .tag {
+/* Video area */
+.category-video {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+.category-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.category-card:hover .category-video video {
+  transform: scale(1.05);
+}
+
+.category-content {
+  padding: 40px 36px 44px;
+}
+
+.category-content .tag {
   font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #888;
-  margin-bottom: 20px;
-}
-
-.category-card h3 {
-  font-size: 28px;
-  font-weight: 400;
   margin-bottom: 16px;
 }
 
-.category-card p {
-  font-size: 16px;
+.category-content h3 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+
+.category-content p {
+  font-size: 15.5px;
   color: #555;
   line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.category-content ul {
+  list-style: none;
   margin-bottom: 28px;
 }
 
-.category-card ul {
-  list-style: none;
-  margin-bottom: 32px;
-}
-
-.category-card li {
+.category-content li {
   font-size: 14px;
   color: #666;
   padding: 8px 0;
   border-bottom: 1px solid #f0f0f0;
 }
 
-.category-card li:last-child {
+.category-content li:last-child {
   border-bottom: none;
 }
 
-.category-card a {
+.category-content a {
   display: inline-block;
   font-size: 12px;
   letter-spacing: 0.25em;
@@ -238,7 +261,7 @@ nav a:hover { color: #111; }
   transition: opacity 0.3s;
 }
 
-.category-card a:hover {
+.category-content a:hover {
   opacity: 0.6;
 }
 
@@ -460,6 +483,10 @@ footer {
   }
 
   .footer-links { justify-content: center; }
+
+  .category-video {
+    height: 220px;
+  }
 }
 </style>
 </head>
@@ -512,80 +539,110 @@ footer {
 
     <!-- TAWAJA -->
     <div class="category-card">
-      <div class="tag">Digital & Brand</div>
-      <h3>TAWAJA</h3>
-      <p>Digital growth systems, brand identity, technology solutions, and scalable marketing infrastructure for ambitious businesses.</p>
-      <ul>
-        <li>Digital transformation projects</li>
-        <li>Brand systems & identity</li>
-        <li>Technology-enabled growth</li>
-      </ul>
-      <a href="https://wa.me/971521712008?text=I'm interested in investing with TAWAJA" target="_blank">Discuss this opportunity</a>
+      <div class="category-video">
+        <video src="assets/invest/tawaja/tawaja-digital-growth-brand-systems.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="category-content">
+        <div class="tag">Digital & Brand</div>
+        <h3>TAWAJA</h3>
+        <p>Digital growth systems, brand identity, technology solutions, and scalable marketing infrastructure for ambitious businesses.</p>
+        <ul>
+          <li>Digital transformation projects</li>
+          <li>Brand systems & identity</li>
+          <li>Technology-enabled growth</li>
+        </ul>
+        <a href="https://wa.me/971521712008?text=I'm interested in investing with TAWAJA" target="_blank">Discuss this opportunity</a>
+      </div>
     </div>
 
     <!-- IRFANA -->
     <div class="category-card">
-      <div class="tag">Culture & Design</div>
-      <h3>IRFANA</h3>
-      <p>A future expression of culture, craftsmanship and design — where heritage meets contemporary form.</p>
-      <ul>
-        <li>Design-led products</li>
-        <li>Craft & cultural ventures</li>
-        <li>Long-term brand building</li>
-      </ul>
-      <a href="https://wa.me/971521712008?text=I'm interested in investing with IRFANA" target="_blank">Discuss this opportunity</a>
+      <div class="category-video">
+        <video src="assets/invest/irfana/irfana-culture-craftsmanship-design.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="category-content">
+        <div class="tag">Culture & Design</div>
+        <h3>IRFANA</h3>
+        <p>A future expression of culture, craftsmanship and design — where heritage meets contemporary form.</p>
+        <ul>
+          <li>Design-led products</li>
+          <li>Craft & cultural ventures</li>
+          <li>Long-term brand building</li>
+        </ul>
+        <a href="https://wa.me/971521712008?text=I'm interested in investing with IRFANA" target="_blank">Discuss this opportunity</a>
+      </div>
     </div>
 
     <!-- AGRICULTURE -->
     <div class="category-card">
-      <div class="tag">Agriculture & Farming</div>
-      <h3>Land, Crops & Livestock</h3>
-      <p>Opportunities across productive farmland, crop cultivation, and modern farming practices in Pakistan.</p>
-      <ul>
-        <li>Farm fields & crop production</li>
-        <li>Poultry farms</li>
-        <li>Agricultural processing</li>
-      </ul>
-      <a href="https://wa.me/971521712008?text=I'm interested in agriculture investment opportunities" target="_blank">Discuss this opportunity</a>
+      <div class="category-video">
+        <video src="assets/invest/agriculture/pakistan-agriculture-farm-fields-poultry.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="category-content">
+        <div class="tag">Agriculture & Farming</div>
+        <h3>Land, Crops & Livestock</h3>
+        <p>Opportunities across productive farmland, crop cultivation, and modern farming practices in Pakistan.</p>
+        <ul>
+          <li>Farm fields & crop production</li>
+          <li>Poultry farms</li>
+          <li>Agricultural processing</li>
+        </ul>
+        <a href="https://wa.me/971521712008?text=I'm interested in agriculture investment opportunities" target="_blank">Discuss this opportunity</a>
+      </div>
     </div>
 
     <!-- HANDICRAFTS -->
     <div class="category-card">
-      <div class="tag">Craftsmanship</div>
-      <h3>Handicrafts & Artisan</h3>
-      <p>Working with skilled artisans and traditional craft communities to create products that travel beyond borders.</p>
-      <ul>
-        <li>Textile & craft production</li>
-        <li>Artisan partnerships</li>
-        <li>Export-ready collections</li>
-      </ul>
-      <a href="https://wa.me/971521712008?text=I'm interested in handicrafts and artisan opportunities" target="_blank">Discuss this opportunity</a>
+      <div class="category-video">
+        <video src="assets/invest/handicrafts/pakistan-handicrafts-artisan-craftsmanship.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="category-content">
+        <div class="tag">Craftsmanship</div>
+        <h3>Handicrafts & Artisan</h3>
+        <p>Working with skilled artisans and traditional craft communities to create products that travel beyond borders.</p>
+        <ul>
+          <li>Textile & craft production</li>
+          <li>Artisan partnerships</li>
+          <li>Export-ready collections</li>
+        </ul>
+        <a href="https://wa.me/971521712008?text=I'm interested in handicrafts and artisan opportunities" target="_blank">Discuss this opportunity</a>
+      </div>
     </div>
 
     <!-- IMPORT EXPORT -->
     <div class="category-card">
-      <div class="tag">Trade</div>
-      <h3>Import & Export</h3>
-      <p>Cross-border trade opportunities connecting Pakistani producers with regional and international markets.</p>
-      <ul>
-        <li>Product sourcing</li>
-        <li>Market entry support</li>
-        <li>Trade partnerships</li>
-      </ul>
-      <a href="https://wa.me/971521712008?text=I'm interested in import-export opportunities" target="_blank">Discuss this opportunity</a>
+      <div class="category-video">
+        <video src="assets/invest/trade/pakistan-import-export-trade-opportunities.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="category-content">
+        <div class="tag">Trade</div>
+        <h3>Import & Export</h3>
+        <p>Cross-border trade opportunities connecting Pakistani producers with regional and international markets.</p>
+        <ul>
+          <li>Product sourcing</li>
+          <li>Market entry support</li>
+          <li>Trade partnerships</li>
+        </ul>
+        <a href="https://wa.me/971521712008?text=I'm interested in import-export opportunities" target="_blank">Discuss this opportunity</a>
+      </div>
     </div>
 
     <!-- RETAIL -->
     <div class="category-card">
-      <div class="tag">Retail & Distribution</div>
-      <h3>Shops & Commerce</h3>
-      <p>From small specialised shops to larger retail and distribution plays across growing markets.</p>
-      <ul>
-        <li>Small & specialised retail</li>
-        <li>Distribution networks</li>
-        <li>Market expansion</li>
-      </ul>
-      <a href="https://wa.me/971521712008?text=I'm interested in retail and distribution opportunities" target="_blank">Discuss this opportunity</a>
+      <div class="category-video">
+        <video src="assets/invest/retail/pakistan-retail-shops-commerce-investment.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="category-content">
+        <div class="tag">Retail & Distribution</div>
+        <h3>Shops & Commerce</h3>
+        <p>From small specialised shops to larger retail and distribution plays across growing markets.</p>
+        <ul>
+          <li>Small & specialised retail</li>
+          <li>Distribution networks</li>
+          <li>Market expansion</li>
+        </ul>
+        <a href="https://wa.me/971521712008?text=I'm interested in retail and distribution opportunities" target="_blank">Discuss this opportunity</a>
+      </div>
     </div>
 
   </div>
