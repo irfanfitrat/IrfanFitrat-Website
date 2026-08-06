@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Insights | Irfan Fitrat</title>
+<meta name="description" content="Insights and thoughts by Irfan Fitrat on investment opportunities, Pakistan-UAE business, entrepreneurship, and building bridges between markets.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.18/lenis.min.js"></script>
+
+<style>
+:root {
+  --white: #ffffff;
+  --black: #111111;
+  --soft: #f5f5f2;
+  --grey: #777777;
+  --line: #e5e5e5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: white;
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 8%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+}
+
+.logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  margin-left: 36px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+nav a:hover { color: #111; }
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #111;
+  transition: 0.3s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* HERO */
+.insights-hero {
+  padding: 180px 8% 100px;
+  background: #111;
+  color: white;
+}
+
+.insights-hero .section-title {
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.insights-hero h1 {
+  font-size: clamp(48px, 7vw, 86px);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.insights-hero p {
+  font-size: 19px;
+  color: #aaa;
+  max-width: 620px;
+  line-height: 1.7;
+}
+
+/* ARTICLES */
+.articles {
+  padding: 100px 8% 140px;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.article-card {
+  border: 1px solid var(--line);
+  transition: border-color 0.35s ease, transform 0.35s ease;
+  background: white;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.article-card:hover {
+  border-color: #bbb;
+  transform: translateY(-5px);
+}
+
+.article-image {
+  height: 280px;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease;
+}
+
+.article-card:hover .article-image img {
+  transform: scale(1.05);
+}
+
+.article-content {
+  padding: 36px 32px 40px;
+}
+
+.article-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.article-content h2 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-bottom: 16px;
+}
+
+.article-content p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.article-content .read-more {
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  padding-bottom: 3px;
+  transition: opacity 0.3s;
+}
+
+.article-card:hover .read-more {
+  opacity: 0.6;
+}
+
+/* FOOTER */
+footer {
+  background: #111;
+  color: #777;
+  padding: 40px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  border-top: 1px solid #333;
+}
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-links a {
+  color: #777;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: white; }
+
+/* WHATSAPP */
+.whatsapp-float {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9998;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.45);
+}
+
+.whatsapp-float svg {
+  width: 32px;
+  height: 32px;
+  fill: white;
+}
+
+.whatsapp-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25D366;
+  animation: whatsapp-pulse 2.2s infinite;
+  z-index: -1;
+}
+
+@keyframes whatsapp-pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  70% { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: #111;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    transition: right 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 999;
+  }
+
+  nav.open { right: 0; }
+
+  nav a {
+    color: white;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+    z-index: 1001;
+  }
+
+  .menu-toggle.active span { background: white; }
+
+  header { padding: 18px 6%; }
+  .insights-hero, .articles { padding-left: 6%; padding-right: 6%; }
+
+  footer {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <a href="index.html">
+      <img src="irfan-fitrat-logo.svg" alt="Irfan Fitrat Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span style="display:none; font-size:16px; font-weight:500; letter-spacing:.28em; color:#111;">IRFAN FITRAT</span>
+    </a>
+  </div>
+  <button class="menu-toggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav id="main-nav">
+    <a href="index.html#world">World</a>
+    <a href="index.html#bridge">Mission</a>
+    <a href="index.html#ventures">Ventures</a>
+    <a href="invest.html">Invest</a>
+    <a href="insights.html">Insights</a>
+    <a href="index.html#contact">Connect</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="insights-hero">
+  <div class="section-title">Insights</div>
+  <h1>Thoughts on opportunity,<br>connection and growth.</h1>
+  <p>Sharing ideas, observations and lessons from building bridges between Pakistan, the UAE and the world.</p>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles">
+  <div class="articles-grid">
+
+    <!-- Article 1 - LIVE -->
+    <a href="investment-opportunities-pakistan-2027.html" class="article-card">
+      <div class="article-image">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" alt="Investment opportunities in Pakistan">
+      </div>
+      <div class="article-content">
+        <div class="article-meta">
+          <span>Investment</span>
+          <span>August 2026</span>
+        </div>
+        <h2>Investment Opportunities in Pakistan 2027: Where Capital Can Still Find Real Value</h2>
+        <p>A detailed look at sectors that still offer structural upside — from agriculture and manufacturing to craftsmanship and trade.</p>
+        <span class="read-more">Read Article</span>
+      </div>
+    </a>
+
+    <!-- Article 2 -->
+    <div class="article-card">
+      <div class="article-image">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80" alt="Pakistan UAE business connection">
+      </div>
+      <div class="article-content">
+        <div class="article-meta">
+          <span>Strategy</span>
+          <span>Coming Soon</span>
+        </div>
+        <h2>The Real Bridge Between Pakistan and the UAE Is Not Just Trade</h2>
+        <p>Capital, talent, and trust are the three pillars that turn cross-border relationships into lasting business value.</p>
+        <span class="read-more">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- Article 3 -->
+    <div class="article-card">
+      <div class="article-image">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Building businesses across borders">
+      </div>
+      <div class="article-content">
+        <div class="article-meta">
+          <span>Entrepreneurship</span>
+          <span>Coming Soon</span>
+        </div>
+        <h2>What Most Investors Miss When Looking at Emerging Markets</h2>
+        <p>Numbers are important, but understanding people, culture, and execution capacity is what separates good investments from great ones.</p>
+        <span class="read-more">Coming Soon</span>
+      </div>
+    </div>
+
+    <!-- Article 4 -->
+    <div class="article-card">
+      <div class="article-image">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Handicrafts and artisan opportunities">
+      </div>
+      <div class="article-content">
+        <div class="article-meta">
+          <span>Craftsmanship</span>
+          <span>Coming Soon</span>
+        </div>
+        <h2>Handicrafts, Heritage and Modern Markets: A New Opportunity</h2>
+        <p>There is a growing global demand for authentic, well-designed products that carry cultural depth and modern quality.</p>
+        <span class="read-more">Coming Soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 Irfan Fitrat</div>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/irfanfitrat" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/irfanfitrat" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@irfanfitrat" target="_blank">TikTok</a>
+    <a href="https://www.youtube.com/@irfanfitrat" target="_blank">YouTube</a>
+    <a href="https://x.com/irfanfitrat" target="_blank">X</a>
+    <a href="https://www.linkedin.com/in/irfanfitrat" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/971521712008" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.128 6.744 3.046 9.378L1.06 30.94l5.686-1.948A15.91 15.91 0 0 0 16.004 32C24.826 32 32 24.824 32 16.004 32 7.176 24.826 0 16.004 0zm8.612 22.61c-.36.996-1.782 1.822-2.918 2.066-.776.164-1.788.294-5.196-.996-4.36-1.654-7.168-6.72-7.386-7.03-.21-.31-1.74-2.316-1.74-4.42 0-2.104 1.106-3.14 1.498-3.566.36-.392.976-.54 1.3-.54.316 0 .64.004.92.016.296.014.694-.112 1.084.826.4.96 1.36 3.32 1.48 3.56.12.24.2.52.04.84-.16.32-.24.52-.48.8-.24.28-.504.624-.72.84-.24.24-.49.5-.21.98.28.48 1.24 2.048 2.664 3.316 1.832 1.632 3.376 2.14 3.856 2.38.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.8 1.32 3.28 1.56.48.24.8.36.92.56.12.2.12 1.14-.24 2.136z"/>
+  </svg>
+</a>
+
+<script>
+const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+const menuToggle = document.querySelector(".menu-toggle");
+const mainNav = document.getElementById("main-nav");
+
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  mainNav.classList.toggle("open");
+  document.body.style.overflow = mainNav.classList.contains("open") ? "hidden" : "";
+});
+
+mainNav.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    mainNav.classList.remove("open");
+    document.body.style.overflow = "";
+  });
+});
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.utils.toArray(".article-card").forEach((card, i) => {
+  gsap.from(card, {
+    scrollTrigger: { trigger: card, start: "top 90%" },
+    opacity: 0,
+    y: 40,
+    duration: 0.9,
+    delay: i * 0.08,
+    ease: "power2.out"
+  });
+});
+</script>
+
+</body>
+</html>
