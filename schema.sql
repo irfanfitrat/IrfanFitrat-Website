@@ -1,0 +1,20 @@
+CREATE TABLE Thoughts (
+  id TEXT PRIMARY KEY,
+  content TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Users (
+  id TEXT PRIMARY KEY,
+  name TEXT,
+  email TEXT UNIQUE,
+  image TEXT
+);
+
+CREATE TABLE Comments (
+  id TEXT PRIMARY KEY,
+  thought_id TEXT NOT NULL,
+  user_email TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
