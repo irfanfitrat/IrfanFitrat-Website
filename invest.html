@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invest | Irfan Fitrat</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.18/lenis.min.js"></script>
-
 <style>
 :root {
   --white: #ffffff;
@@ -22,22 +18,18 @@
   --grey: #777777;
   --line: #e5e5e5;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: white;
   color: var(--black);
   overflow-x: hidden;
 }
-
 /* HEADER */
 header {
   position: fixed;
@@ -52,13 +44,11 @@ header {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(18px);
 }
-
 .logo img {
   height: 28px;
   width: auto;
   display: block;
 }
-
 nav a {
   text-decoration: none;
   color: #555;
@@ -68,9 +58,7 @@ nav a {
   text-transform: uppercase;
   transition: color 0.3s ease;
 }
-
 nav a:hover { color: #111; }
-
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -80,7 +68,6 @@ nav a:hover { color: #111; }
   border: none;
   padding: 8px;
 }
-
 .menu-toggle span {
   display: block;
   width: 22px;
@@ -88,7 +75,6 @@ nav a:hover { color: #111; }
   background: #111;
   transition: 0.3s;
 }
-
 .menu-toggle.active span:nth-child(1) {
   transform: translateY(7.5px) rotate(45deg);
 }
@@ -96,7 +82,6 @@ nav a:hover { color: #111; }
 .menu-toggle.active span:nth-child(3) {
   transform: translateY(-7.5px) rotate(-45deg);
 }
-
 /* HERO */
 .invest-hero {
   min-height: 70vh;
@@ -106,7 +91,6 @@ nav a:hover { color: #111; }
   background: #111;
   color: white;
 }
-
 .invest-hero .section-title {
   font-size: 13px;
   letter-spacing: 0.35em;
@@ -114,7 +98,6 @@ nav a:hover { color: #111; }
   color: #888;
   margin-bottom: 28px;
 }
-
 .invest-hero h1 {
   font-size: clamp(48px, 7vw, 92px);
   font-weight: 300;
@@ -123,20 +106,17 @@ nav a:hover { color: #111; }
   max-width: 900px;
   margin-bottom: 32px;
 }
-
 .invest-hero p {
   font-size: 20px;
   color: #aaa;
   max-width: 620px;
   line-height: 1.7;
 }
-
 /* INTRO */
 .intro {
   padding: 120px 8%;
   max-width: 900px;
 }
-
 .intro h2 {
   font-size: clamp(36px, 4.5vw, 52px);
   font-weight: 300;
@@ -144,18 +124,15 @@ nav a:hover { color: #111; }
   line-height: 1.25;
   margin-bottom: 28px;
 }
-
 .intro p {
   font-size: 19px;
   color: #555;
   line-height: 1.8;
 }
-
 /* CATEGORIES */
 .categories {
   padding: 0 8% 120px;
 }
-
 .categories .section-title {
   font-size: 13px;
   letter-spacing: 0.35em;
@@ -163,32 +140,27 @@ nav a:hover { color: #111; }
   color: #777;
   margin-bottom: 20px;
 }
-
 .categories h2 {
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 300;
   letter-spacing: -0.04em;
   margin-bottom: 60px;
 }
-
 .category-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
 }
-
 .category-card {
   border: 1px solid var(--line);
   overflow: hidden;
   background: white;
   transition: border-color 0.35s ease, transform 0.35s ease;
 }
-
 .category-card:hover {
   border-color: #bbb;
   transform: translateY(-4px);
 }
-
 /* Video area */
 .category-video {
   height: 260px;
@@ -196,22 +168,18 @@ nav a:hover { color: #111; }
   overflow: hidden;
   background: #111;
 }
-
 .category-video video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 1.1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-
 .category-card:hover .category-video video {
   transform: scale(1.05);
 }
-
 .category-content {
   padding: 40px 36px 44px;
 }
-
 .category-content .tag {
   font-size: 11px;
   letter-spacing: 0.3em;
@@ -219,36 +187,30 @@ nav a:hover { color: #111; }
   color: #888;
   margin-bottom: 16px;
 }
-
 .category-content h3 {
   font-size: 26px;
   font-weight: 400;
   margin-bottom: 14px;
 }
-
 .category-content p {
   font-size: 15.5px;
   color: #555;
   line-height: 1.7;
   margin-bottom: 24px;
 }
-
 .category-content ul {
   list-style: none;
   margin-bottom: 28px;
 }
-
 .category-content li {
   font-size: 14px;
   color: #666;
   padding: 8px 0;
   border-bottom: 1px solid #f0f0f0;
 }
-
 .category-content li:last-child {
   border-bottom: none;
 }
-
 .category-content a {
   display: inline-block;
   font-size: 12px;
@@ -260,17 +222,14 @@ nav a:hover { color: #111; }
   padding-bottom: 3px;
   transition: opacity 0.3s;
 }
-
 .category-content a:hover {
   opacity: 0.6;
 }
-
 /* HOW IT WORKS */
 .how {
   background: #f5f5f2;
   padding: 120px 8%;
 }
-
 .how .section-title {
   font-size: 13px;
   letter-spacing: 0.35em;
@@ -278,44 +237,37 @@ nav a:hover { color: #111; }
   color: #777;
   margin-bottom: 20px;
 }
-
 .how h2 {
   font-size: clamp(40px, 5vw, 64px);
   font-weight: 300;
   letter-spacing: -0.04em;
   margin-bottom: 70px;
 }
-
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
-
 .step {
   background: white;
   padding: 40px 36px;
 }
-
 .step .number {
   font-size: 13px;
   letter-spacing: 0.3em;
   color: #999;
   margin-bottom: 24px;
 }
-
 .step h3 {
   font-size: 24px;
   font-weight: 400;
   margin-bottom: 16px;
 }
-
 .step p {
   font-size: 16px;
   color: #555;
   line-height: 1.7;
 }
-
 /* CTA */
 .cta {
   background: #111;
@@ -323,7 +275,6 @@ nav a:hover { color: #111; }
   text-align: center;
   padding: 140px 8%;
 }
-
 .cta h2 {
   font-size: clamp(42px, 6vw, 78px);
   font-weight: 300;
@@ -331,7 +282,6 @@ nav a:hover { color: #111; }
   line-height: 1.1;
   margin-bottom: 28px;
 }
-
 .cta p {
   font-size: 19px;
   color: #aaa;
@@ -339,14 +289,12 @@ nav a:hover { color: #111; }
   margin: 0 auto 50px;
   line-height: 1.7;
 }
-
 .cta-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
-
 .cta-buttons a {
   text-decoration: none;
   color: white;
@@ -358,13 +306,11 @@ nav a:hover { color: #111; }
   text-transform: uppercase;
   transition: 0.4s ease;
 }
-
 .cta-buttons a:hover {
   background: white;
   color: #111;
   border-color: white;
 }
-
 /* FOOTER */
 footer {
   background: #111;
@@ -377,20 +323,16 @@ footer {
   letter-spacing: 0.28em;
   border-top: 1px solid #333;
 }
-
 .footer-links {
   display: flex;
   gap: 28px;
 }
-
 .footer-links a {
   color: #777;
   text-decoration: none;
   transition: color 0.3s;
 }
-
 .footer-links a:hover { color: white; }
-
 /* WHATSAPP */
 .whatsapp-float {
   position: fixed;
@@ -408,18 +350,15 @@ footer {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
 }
-
 .whatsapp-float:hover {
   transform: scale(1.08);
   box-shadow: 0 12px 32px rgba(37, 211, 102, 0.45);
 }
-
 .whatsapp-float svg {
   width: 32px;
   height: 32px;
   fill: white;
 }
-
 .whatsapp-float::before {
   content: "";
   position: absolute;
@@ -429,20 +368,17 @@ footer {
   animation: whatsapp-pulse 2.2s infinite;
   z-index: -1;
 }
-
 @keyframes whatsapp-pulse {
   0% { transform: scale(1); opacity: 0.6; }
   70% { transform: scale(1.45); opacity: 0; }
   100% { transform: scale(1.45); opacity: 0; }
 }
-
 /* MOBILE */
 @media (max-width: 900px) {
   .category-grid,
   .steps {
     grid-template-columns: 1fr;
   }
-
   nav {
     position: fixed;
     top: 0;
@@ -457,47 +393,37 @@ footer {
     transition: right 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
     z-index: 999;
   }
-
   nav.open { right: 0; }
-
   nav a {
     color: white;
     font-size: 18px;
     margin: 0;
   }
-
   .menu-toggle {
     display: flex;
     z-index: 1001;
   }
-
   .menu-toggle.active span { background: white; }
-
   header { padding: 18px 6%; }
   .invest-hero, .intro, .categories, .how, .cta { padding-left: 6%; padding-right: 6%; }
-
   footer {
     flex-direction: column;
     gap: 24px;
     text-align: center;
   }
-
   .footer-links { justify-content: center; }
-
   .category-video {
     height: 220px;
   }
 }
 </style>
 </head>
-
 <body>
-
 <!-- HEADER -->
 <header>
   <div class="logo">
     <a href="index.html">
-      <img src="logo.svg" alt="Irfan Fitrat" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <img src="irfan-fitrat-logo.svg" alt="Irfan Fitrat Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
       <span style="display:none; font-size:16px; font-weight:500; letter-spacing:.28em; color:#111;">IRFAN FITRAT</span>
     </a>
   </div>
@@ -510,11 +436,12 @@ footer {
     <a href="index.html#world">World</a>
     <a href="index.html#bridge">Mission</a>
     <a href="index.html#ventures">Ventures</a>
-    <a href="index.html#opportunity">Opportunities</a>
+    <a href="invest.html">Invest</a>
+    <a href="insights.html">Insights</a>
+    <a href="thoughts.html">Thoughts</a>
     <a href="index.html#contact">Connect</a>
   </nav>
 </header>
-
 <!-- HERO -->
 <section class="invest-hero">
   <div>
@@ -523,20 +450,16 @@ footer {
     <p>I connect investors with carefully selected opportunities across Pakistan and the UAE — from digital systems to agriculture, craftsmanship, and trade.</p>
   </div>
 </section>
-
 <!-- INTRO -->
 <section class="intro">
   <h2>I don’t just introduce deals.<br>I build bridges between people and potential.</h2>
   <p>Every opportunity I present is filtered through one question: Does this create real value for both sides? Whether you are looking for growth equity, joint ventures, or meaningful participation, the goal remains the same — long-term partnership over short-term transactions.</p>
 </section>
-
 <!-- CATEGORIES -->
 <section class="categories">
   <div class="section-title">Areas of Opportunity</div>
   <h2>Where you can invest</h2>
-
   <div class="category-grid">
-
     <!-- TAWAJA -->
     <div class="category-card">
       <div class="category-video">
@@ -554,7 +477,6 @@ footer {
         <a href="https://wa.me/971521712008?text=I'm interested in investing with TAWAJA" target="_blank">Discuss this opportunity</a>
       </div>
     </div>
-
     <!-- IRFANA -->
     <div class="category-card">
       <div class="category-video">
@@ -572,7 +494,6 @@ footer {
         <a href="https://wa.me/971521712008?text=I'm interested in investing with IRFANA" target="_blank">Discuss this opportunity</a>
       </div>
     </div>
-
     <!-- AGRICULTURE -->
     <div class="category-card">
       <div class="category-video">
@@ -590,7 +511,6 @@ footer {
         <a href="https://wa.me/971521712008?text=I'm interested in agriculture investment opportunities" target="_blank">Discuss this opportunity</a>
       </div>
     </div>
-
     <!-- HANDICRAFTS -->
     <div class="category-card">
       <div class="category-video">
@@ -608,7 +528,6 @@ footer {
         <a href="https://wa.me/971521712008?text=I'm interested in handicrafts and artisan opportunities" target="_blank">Discuss this opportunity</a>
       </div>
     </div>
-
     <!-- IMPORT EXPORT -->
     <div class="category-card">
       <div class="category-video">
@@ -626,7 +545,6 @@ footer {
         <a href="https://wa.me/971521712008?text=I'm interested in import-export opportunities" target="_blank">Discuss this opportunity</a>
       </div>
     </div>
-
     <!-- RETAIL -->
     <div class="category-card">
       <div class="category-video">
@@ -644,15 +562,12 @@ footer {
         <a href="https://wa.me/971521712008?text=I'm interested in retail and distribution opportunities" target="_blank">Discuss this opportunity</a>
       </div>
     </div>
-
   </div>
 </section>
-
 <!-- HOW IT WORKS -->
 <section class="how">
   <div class="section-title">Process</div>
   <h2>How we work together</h2>
-
   <div class="steps">
     <div class="step">
       <div class="number">01</div>
@@ -671,7 +586,6 @@ footer {
     </div>
   </div>
 </section>
-
 <!-- CTA -->
 <section class="cta">
   <h2>Ready to explore?</h2>
@@ -681,7 +595,6 @@ footer {
     <a href="mailto:hi@irfanfitrat.com">Email</a>
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <div>© 2026 Irfan Fitrat</div>
@@ -694,14 +607,12 @@ footer {
     <a href="https://www.linkedin.com/in/irfanfitrat" target="_blank">LinkedIn</a>
   </div>
 </footer>
-
 <!-- WHATSAPP BUTTON -->
 <a href="https://wa.me/971521712008" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.128 6.744 3.046 9.378L1.06 30.94l5.686-1.948A15.91 15.91 0 0 0 16.004 32C24.826 32 32 24.824 32 16.004 32 7.176 24.826 0 16.004 0zm8.612 22.61c-.36.996-1.782 1.822-2.918 2.066-.776.164-1.788.294-5.196-.996-4.36-1.654-7.168-6.72-7.386-7.03-.21-.31-1.74-2.316-1.74-4.42 0-2.104 1.106-3.14 1.498-3.566.36-.392.976-.54 1.3-.54.316 0 .64.004.92.016.296.014.694-.112 1.084.826.4.96 1.36 3.32 1.48 3.56.12.24.2.52.04.84-.16.32-.24.52-.48.8-.24.28-.504.624-.72.84-.24.24-.49.5-.21.98.28.48 1.24 2.048 2.664 3.316 1.832 1.632 3.376 2.14 3.856 2.38.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.8 1.32 3.28 1.56.48.24.8.36.92.56.12.2.12 1.14-.24 2.136z"/>
   </svg>
 </a>
-
 <script>
 /* Smooth scroll */
 const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
@@ -710,17 +621,14 @@ function raf(time) {
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
-
 /* Mobile menu */
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.getElementById("main-nav");
-
 menuToggle.addEventListener("click", () => {
   menuToggle.classList.toggle("active");
   mainNav.classList.toggle("open");
   document.body.style.overflow = mainNav.classList.contains("open") ? "hidden" : "";
 });
-
 mainNav.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     menuToggle.classList.remove("active");
@@ -728,10 +636,8 @@ mainNav.querySelectorAll("a").forEach(link => {
     document.body.style.overflow = "";
   });
 });
-
 /* Simple reveal animations */
 gsap.registerPlugin(ScrollTrigger);
-
 gsap.utils.toArray(".category-card, .step").forEach((el, i) => {
   gsap.from(el, {
     scrollTrigger: { trigger: el, start: "top 90%" },
@@ -743,6 +649,5 @@ gsap.utils.toArray(".category-card, .step").forEach((el, i) => {
   });
 });
 </script>
-
 </body>
 </html>
