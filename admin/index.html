@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Thoughts | Irfan Fitrat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --soft: #f5f5f2;
+      --grey: #777777;
+      --line: #e5e5e5;
+      --green: #16a34a;
+      --red: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+    body {
+      background: #fafafa;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .admin-header {
+      background: white;
+      border-bottom: 1px solid var(--line);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-header h1 {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .admin-header a {
+      font-size: 13px;
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .admin-header a:hover { color: var(--black); }
+
+    /* Layout */
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 40px 100px;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .admin-tab {
+      padding: 12px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--grey);
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      letter-spacing: 0.03em;
+    }
+
+    .admin-tab.active {
+      color: var(--black);
+    }
+
+    .admin-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--black);
+    }
+
+    /* Cards & Forms */
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .card-header h2 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="datetime-local"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 15px;
+      margin-bottom: 20px;
+      background: white;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #999;
+    }
+
+    textarea {
+      min-height: 220px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--black);
+      color: white;
+    }
+
+    .btn-primary:hover { background: #333; }
+
+    .btn-outline {
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--black);
+    }
+
+    .btn-outline:hover { border-color: #999; }
+
+    .btn-danger {
+      background: white;
+      border: 1px solid #fecaca;
+      color: var(--red);
+    }
+
+    .btn-danger:hover { background: #fef2f2; }
+
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 12px;
+    }
+
+    /* Post List */
+    .post-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .post-item:last-child { border-bottom: none; }
+
+    .post-info h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .post-meta {
+      font-size: 13px;
+      color: var(--grey);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-published {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-draft {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+
+    .badge-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Comments */
+    .comment-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .comment-item:last-child { border-bottom: none; }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .comment-author {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .comment-email {
+      font-size: 13px;
+      color: var(--grey);
+    }
+
+    .comment-content {
+      font-size: 15px;
+      margin: 10px 0 14px;
+      line-height: 1.6;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--grey);
+    }
+
+    .empty-state p {
+      font-size: 15px;
+      margin-top: 8px;
+    }
+
+    /* Hidden panels */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    @media (max-width: 768px) {
+      .admin-container { padding: 24px 20px 80px; }
+      .admin-header { padding: 16px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .post-item { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="admin-header">
+    <h1>Thoughts Admin</h1>
+    <div style="display:flex; gap:24px; align-items:center;">
+      <a href="/thoughts" target="_blank">View Public Page →</a>
+      <a href="/">← Back to Website</a>
+    </div>
+  </div>
+
+  <div class="admin-container">
+
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="posts">Posts</button>
+      <button class="admin-tab" data-tab="create">Create New</button>
+      <button class="admin-tab" data-tab="comments">Comments</button>
+    </div>
+
+    <!-- ==================== POSTS LIST ==================== -->
+    <div id="panel-posts" class="panel active">
+      <div class="card">
+        <div class="card-header">
+          <h2>All Thoughts</h2>
+          <button class="btn btn-primary btn-sm" onclick="switchTab('create')">+ New Thought</button>
+        </div>
+
+        <div id="posts-list">
+          <!-- Posts will be loaded here -->
+          <div class="empty-state">
+            <p>Loading posts...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CREATE / EDIT ==================== -->
+    <div id="panel-create" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2 id="form-title">Create New Thought</h2>
+        </div>
+
+        <form id="post-form">
+          <input type="hidden" id="post-id">
+
+          <label>Title</label>
+          <input type="text" id="title" placeholder="Write a clear title..." required>
+
+          <label>Slug (URL)</label>
+          <input type="text" id="slug" placeholder="auto-generated-from-title" required>
+
+          <label>Excerpt (short summary)</label>
+          <textarea id="excerpt" style="min-height:90px" placeholder="A short description that appears on the feed..."></textarea>
+
+          <label>Content</label>
+          <textarea id="content" placeholder="Write your thought here..." required></textarea>
+
+          <div class="form-row">
+            <div>
+              <label>Cover Image URL (optional)</label>
+              <input type="url" id="cover_image" placeholder="https://...">
+            </div>
+            <div>
+              <label>Tags (comma separated)</label>
+              <input type="text" id="tags" placeholder="business, pakistan, investment">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label>Status</label>
+              <select id="status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+            <div>
+              <label>Publish Date</label>
+              <input type="datetime-local" id="published_at">
+            </div>
+          </div>
+
+          <div style="display:flex; gap:12px; margin-top:10px;">
+            <button type="submit" class="btn btn-primary">Save Thought</button>
+            <button type="button" class="btn btn-outline" onclick="resetForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==================== COMMENTS ==================== -->
+    <div id="panel-comments" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2>Comment Moderation</h2>
+          <select id="comment-filter" style="width:auto; margin:0; padding:8px 12px;">
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <div id="comments-list">
+          <div class="empty-state">
+            <p>Loading comments...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ====================== CONFIG ======================
+    const API_BASE = "https://thoughts-api.YOUR_SUBDOMAIN.workers.dev"; // ← Replace later
+    // For now we use localStorage as temporary storage until Worker is ready
+
+    // ====================== TABS ======================
+    function switchTab(tabName) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+      document.getElementById(`panel-${tabName}`).classList.add('active');
+
+      if (tabName === 'posts') loadPosts();
+      if (tabName === 'comments') loadComments();
+    }
+
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    });
+
+    // ====================== POSTS ======================
+    function loadPosts() {
+      const posts = JSON.parse(localStorage.getItem('thoughts_posts') || '[]');
+      const container = document.getElementById('posts-list');
+
+      if (posts.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <p>No thoughts yet.</p>
+            <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="switchTab('create')">Create your first thought</button>
+          </div>`;
+        return;
+      }
+
+      // Sort newest first
+      posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      container.innerHTML = posts.map(post => `
+        <div class="post-item">
+          <div class="post-info">
+            <h3>${escapeHtml(post.title)}</h3>
+            <div class="post-meta">
+              <span class="badge ${post.status === 'published' ? 'badge-published' : 'badge-draft'}">${post.status}</span>
+              &nbsp;·&nbsp; ${formatDate(post.published_at || post.created_at)}
+              ${post.slug ? `&nbsp;·&nbsp; /thoughts/${post.slug}` : ''}
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline btn-sm" onclick="editPost('${post.id}')">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="deletePost('${post.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function editPost(id) {
+      const posts = JSON.parse(localStorage.getItem('thoughts_posts') || '[]');
+      const post = posts.find(p => p.id === id);
+      if (!post) return;
+
+      document.getElementById('post-id').value = post.id;
+      document.getElementById('title').value = post.title;
+      document.getElementById('slug').value = post.slug;
+      document.getElementById('excerpt').value = post.excerpt || '';
+      document.getElementById('content').value = post.content;
+      document.getElementById('cover_image').value = post.cover_image || '';
+      document.getElementById('tags').value = post.tags || '';
+      document.getElementById('status').value = post.status;
+      document.getElementById('published_at').value = post.published_at ? post.published_at.slice(0, 16) : '';
+
+      document.getElementById('form-title').textContent = 'Edit Thought';
+      switchTab('create');
+    }
+
+    function deletePost(id) {
+      if (!confirm('Are you sure you want to delete this thought?')) return;
+
+      let posts = JSON.parse(localStorage.getItem('thoughts_posts') || '[]');
+      posts = posts.filter(p => p.id !== id);
+      localStorage.setItem('thoughts_posts', JSON.stringify(posts));
+      loadPosts();
+    }
+
+    function resetForm() {
+      document.getElementById('post-form').reset();
+      document.getElementById('post-id').value = '';
+      document.getElementById('form-title').textContent = 'Create New Thought';
+      switchTab('posts');
+    }
+
+    // Auto-generate slug from title
+    document.getElementById('title').addEventListener('input', function() {
+      const id = document.getElementById('post-id').value;
+      if (id) return; // don't change slug when editing
+
+      const slug = this.value
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+      document.getElementById('slug').value = slug;
+    });
+
+    // Save Post
+    document.getElementById('post-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const id = document.getElementById('post-id').value || crypto.randomUUID();
+      const now = new Date().toISOString();
+
+      const post = {
+        id,
+        title: document.getElementById('title').value.trim(),
+        slug: document.getElementById('slug').value.trim(),
+        excerpt: document.getElementById('excerpt').value.trim(),
+        content: document.getElementById('content').value.trim(),
+        cover_image: document.getElementById('cover_image').value.trim(),
+        tags: document.getElementById('tags').value.trim(),
+        status: document.getElementById('status').value,
+        published_at: document.getElementById('published_at').value || (document.getElementById('status').value === 'published' ? now : null),
+        created_at: document.getElementById('post-id').value ? 
+          (JSON.parse(localStorage.getItem('thoughts_posts') || '[]').find(p => p.id === id)?.created_at || now) : now,
+        updated_at: now
+      };
+
+      let posts = JSON.parse(localStorage.getItem('thoughts_posts') || '[]');
+      const existingIndex = posts.findIndex(p => p.id === id);
+
+      if (existingIndex >= 0) {
+        posts[existingIndex] = post;
+      } else {
+        posts.push(post);
+      }
+
+      localStorage.setItem('thoughts_posts', JSON.stringify(posts));
+      alert('Thought saved successfully!');
+      resetForm();
+      loadPosts();
+    });
+
+    // ====================== COMMENTS ======================
+    function loadComments() {
+      const filter = document.getElementById('comment-filter').value;
+      let comments = JSON.parse(localStorage.getItem('thoughts_comments') || '[]');
+
+      if (filter !== 'all') {
+        comments = comments.filter(c => c.status === filter);
+      }
+
+      const container = document.getElementById('comments-list');
+
+      if (comments.length === 0) {
+        container.innerHTML = `<div class="empty-state"><p>No comments found.</p></div>`;
+        return;
+      }
+
+      comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      container.innerHTML = comments.map(comment => `
+        <div class="comment-item">
+          <div class="comment-header">
+            <div>
+              <span class="comment-author">${escapeHtml(comment.name)}</span>
+              <span class="comment-email"> · ${escapeHtml(comment.email)}</span>
+            </div>
+            <span class="badge badge-${comment.status}">${comment.status}</span>
+          </div>
+          <div class="comment-content">${escapeHtml(comment.content)}</div>
+          <div class="actions">
+            ${comment.status !== 'approved' ? `<button class="btn btn-primary btn-sm" onclick="updateCommentStatus('${comment.id}', 'approved')">Approve</button>` : ''}
+            ${comment.status !== 'rejected' ? `<button class="btn btn-outline btn-sm" onclick="updateCommentStatus('${comment.id}', 'rejected')">Reject</button>` : ''}
+            <button class="btn btn-danger btn-sm" onclick="deleteComment('${comment.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('comment-filter').addEventListener('change', loadComments);
+
+    function updateCommentStatus(id, status) {
+      let comments = JSON.parse(localStorage.getItem('thoughts_comments') || '[]');
+      comments = comments.map(c => c.id === id ? { ...c, status } : c);
+      localStorage.setItem('thoughts_comments', JSON.stringify(comments));
+      loadComments();
+    }
+
+    function deleteComment(id) {
+      if (!confirm('Delete this comment permanently?')) return;
+      let comments = JSON.parse(localStorage.getItem('thoughts_comments') || '[]');
+      comments = comments.filter(c => c.id !== id);
+      localStorage.setItem('thoughts_comments', JSON.stringify(comments));
+      loadComments();
+    }
+
+    // ====================== HELPERS ======================
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    // Init
+    loadPosts();
+  </script>
+</body>
+</html>
