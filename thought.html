@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thought | Irfan Fitrat</title>
+  <meta name="description" content="Personal thoughts by Irfan Fitrat">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --black: #111111;
+      --soft: #f5f5f2;
+      --grey: #777777;
+      --line: #e5e5e5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: white;
+      color: var(--black);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 8%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(18px);
+    }
+
+    .logo img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      margin-left: 36px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: #111; }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #111;
+      transition: 0.3s;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    /* Article */
+    .thought-article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 160px 8% 80px;
+    }
+
+    .thought-meta {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .thought-article h1 {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 32px;
+    }
+
+    .thought-content {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 50px;
+    }
+
+    .thought-content p {
+      margin-bottom: 24px;
+    }
+
+    /* Share */
+    .share-section {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 60px;
+    }
+
+    .share-section span {
+      font-size: 13px;
+      color: #888;
+      margin-right: 8px;
+    }
+
+    .share-btn {
+      font-size: 13px;
+      color: #555;
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+
+    .share-btn:hover {
+      border-color: #999;
+      color: #111;
+    }
+
+    /* Comments Section */
+    .comments-section {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 8% 100px;
+    }
+
+    .comments-section h2 {
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    /* Comment Form */
+    .comment-form {
+      background: #f9f9f7;
+      padding: 32px;
+      border-radius: 6px;
+      margin-bottom: 50px;
+    }
+
+    .comment-form h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 15px;
+      background: white;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #999;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--black);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #333;
+    }
+
+    .form-note {
+      font-size: 13px;
+      color: #888;
+      margin-top: 12px;
+    }
+
+    /* Comments List */
+    .comment {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .comment:last-child {
+      border-bottom: none;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .comment-author {
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .comment-date {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .comment-body {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .no-comments {
+      text-align: center;
+      padding: 40px 0;
+      color: #888;
+      font-size: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #777;
+      padding: 40px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      color: #777;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    /* WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 9998;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+
+    .whatsapp-float svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: #111;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 36px;
+        transition: right 0.45s;
+        z-index: 999;
+      }
+
+      nav.open { right: 0; }
+
+      nav a {
+        color: white;
+        font-size: 18px;
+        margin: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+        z-index: 1001;
+      }
+
+      .menu-toggle.active span { background: white; }
+
+      header { padding: 18px 6%; }
+      .thought-article, .comments-section { padding-left: 6%; padding-right: 6%; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      footer {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+      }
+
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="irfan-fitrat-logo.svg" alt="Irfan Fitrat Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <span style="display:none; font-size:16px; font-weight:500; letter-spacing:.28em; color:#111;">IRFAN FITRAT</span>
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="main-nav">
+      <a href="index.html#world">World</a>
+      <a href="index.html#bridge">Mission</a>
+      <a href="index.html#ventures">Ventures</a>
+      <a href="invest.html">Invest</a>
+      <a href="insights.html">Insights</a>
+      <a href="thoughts.html">Thoughts</a>
+      <a href="index.html#contact">Connect</a>
+    </nav>
+  </header>
+
+  <!-- Thought Content -->
+  <article class="thought-article">
+    <div class="thought-meta" id="thought-date">Loading...</div>
+    <h1 id="thought-title">Loading...</h1>
+    <div class="thought-content" id="thought-content"></div>
+
+    <!-- Share -->
+    <div class="share-section">
+      <span>Share</span>
+      <a href="#" class="share-btn" id="share-twitter" target="_blank">X</a>
+      <a href="#" class="share-btn" id="share-linkedin" target="_blank">LinkedIn</a>
+      <a href="#" class="share-btn" onclick="copyLink(); return false;">Copy Link</a>
+    </div>
+  </article>
+
+  <!-- Comments -->
+  <section class="comments-section">
+    <h2>Comments</h2>
+
+    <!-- Comment Form -->
+    <div class="comment-form">
+      <h3>Leave a comment</h3>
+      <form id="comment-form">
+        <div class="form-row">
+          <div>
+            <label>Name</label>
+            <input type="text" id="comment-name" required placeholder="Your name">
+          </div>
+          <div>
+            <label>Email (will not be published)</label>
+            <input type="email" id="comment-email" required placeholder="Your email">
+          </div>
+        </div>
+        <label>Comment</label>
+        <textarea id="comment-content" required placeholder="Write your comment..."></textarea>
+        <button type="submit" class="btn">Post Comment</button>
+        <p class="form-note">Your email address will not be published. Comments are moderated.</p>
+      </form>
+    </div>
+
+    <!-- Comments List -->
+    <div id="comments-list">
+      <div class="no-comments">Loading comments...</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 Irfan Fitrat</div>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/irfanfitrat" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/irfanfitrat" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@irfanfitrat" target="_blank">TikTok</a>
+      <a href="https://www.youtube.com/@irfanfitrat" target="_blank">YouTube</a>
+      <a href="https://x.com/irfanfitrat" target="_blank">X</a>
+      <a href="https://www.linkedin.com/in/irfanfitrat" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/971521712008" class="whatsapp-float" target="_blank" rel="noopener">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.128 6.744 3.046 9.378L1.06 30.94l5.686-1.948A15.91 15.91 0 0 0 16.004 32C24.826 32 32 24.824 32 16.004 32 7.176 24.826 0 16.004 0zm8.612 22.61c-.36.996-1.782 1.822-2.918 2.066-.776.164-1.788.294-5.196-.996-4.36-1.654-7.168-6.72-7.386-7.03-.21-.31-1.74-2.316-1.74-4.42 0-2.104 1.106-3.14 1.498-3.566.36-.392.976-.54 1.3-.54.316 0 .64.004.92.016.296.014.694-.112 1.084.826.4.96 1.36 3.32 1.48 3.56.12.24.2.52.04.84-.16.32-.24.52-.48.8-.24.28-.504.624-.72.84-.24.24-.49.5-.21.98.28.48 1.24 2.048 2.664 3.316 1.832 1.632 3.376 2.14 3.856 2.38.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.8 1.32 3.28 1.56.48.24.8.36.92.56.12.2.12 1.14-.24 2.136z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Mobile menu
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mainNav = document.getElementById("main-nav");
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      mainNav.classList.toggle("open");
+      document.body.style.overflow = mainNav.classList.contains("open") ? "hidden" : "";
+    });
+
+    // Get slug from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const slug = urlParams.get('slug');
+
+    let currentPost = null;
+
+    // Load Thought
+    function loadThought() {
+      const posts = JSON.parse(localStorage.getItem('thoughts_posts') || '[]');
+      currentPost = posts.find(p => p.slug === slug && p.status === 'published');
+
+      if (!currentPost) {
+        document.getElementById('thought-title').textContent = 'Thought not found';
+        document.getElementById('thought-content').innerHTML = '<p>This thought does not exist or is not published.</p>';
+        document.getElementById('thought-date').textContent = '';
+        return;
+      }
+
+      document.title = currentPost.title + ' | Irfan Fitrat';
+      document.getElementById('thought-title').textContent = currentPost.title;
+      document.getElementById('thought-date').textContent = formatDate(currentPost.published_at || currentPost.created_at);
+      document.getElementById('thought-content').innerHTML = currentPost.content.replace(/\n/g, '<br>');
+
+      // Share links
+      const pageUrl = encodeURIComponent(window.location.href);
+      const pageTitle = encodeURIComponent(currentPost.title);
+      document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+      document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+
+      loadComments();
+    }
+
+    // Load Comments
+    function loadComments() {
+      if (!currentPost) return;
+
+      const allComments = JSON.parse(localStorage.getItem('thoughts_comments') || '[]');
+      const comments = allComments.filter(c => c.post_id === currentPost.id && c.status === 'approved');
+
+      const container = document.getElementById('comments-list');
+
+      if (comments.length === 0) {
+        container.innerHTML = `<div class="no-comments">No comments yet. Be the first to share your thoughts.</div>`;
+        return;
+      }
+
+      comments.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
+      container.innerHTML = comments.map(c => `
+        <div class="comment">
+          <div class="comment-header">
+            <span class="comment-author">${escapeHtml(c.name)}</span>
+            <span class="comment-date">${formatDate(c.created_at)}</span>
+          </div>
+          <div class="comment-body">${escapeHtml(c.content)}</div>
+        </div>
+      `).join('');
+    }
+
+    // Submit Comment
+    document.getElementById('comment-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!currentPost) return alert('Post not found');
+
+      const name = document.getElementById('comment-name').value.trim();
+      const email = document.getElementById('comment-email').value.trim();
+      const content = document.getElementById('comment-content').value.trim();
+
+      if (!name || !email || !content) return;
+
+      const comment = {
+        id: crypto.randomUUID(),
+        post_id: currentPost.id,
+        parent_id: null,
+        name,
+        email,
+        content,
+        status: 'pending',
+        created_at: new Date().toISOString()
+      };
+
+      const comments = JSON.parse(localStorage.getItem('thoughts_comments') || '[]');
+      comments.push(comment);
+      localStorage.setItem('thoughts_comments', JSON.stringify(comments));
+
+      alert('Thank you! Your comment has been submitted and is awaiting moderation.');
+      this.reset();
+    });
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Link copied to clipboard');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // Init
+    loadThought();
+  </script>
+</body>
+</html>
