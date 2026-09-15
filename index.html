@@ -109,6 +109,12 @@ nav a {
   transition: color .3s ease;
 }
 nav a:hover { color: #111; }
+nav a.active {
+  color: #111;
+  font-weight: 600;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+}
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -623,9 +629,15 @@ footer {
   nav.open { right: 0; }
   nav a {
     color: white;
-    font-size: 18px;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
     margin: 0;
-    letter-spacing: .3em;
+    text-transform: capitalize;
+  }
+  nav a.active {
+    color: white;
+    border-color: white;
   }
   .menu-toggle {
     display: flex;
@@ -821,282 +833,4 @@ footer {
         <h3>IRFANA</h3>
         <span>A future expression of culture, craftsmanship and design</span>
         <p>
-          A vision where craftsmanship, culture, and modern design meet — still taking form, still evolving.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- OPPORTUNITY -->
-<section class="opportunity" id="opportunity">
-  <div class="section-title">Opportunity</div>
-  <h2>Where do you want to go?</h2>
-  <div class="opportunity-grid">
-    <a href="invest.html" class="opportunity-card">
-      <h3>Invest & Build</h3>
-      <p>Partner with me to invest capital and create meaningful businesses, projects and opportunities across Pakistan and the UAE.</p>
-    </a>
-    <div class="opportunity-card">
-      <h3>Source</h3>
-      <p>Connect with manufacturers, suppliers, and production partners in Pakistan.</p>
-    </div>
-    <div class="opportunity-card">
-      <h3>Explore</h3>
-      <p>Visit Pakistan or the UAE. See the ecosystems, meet the people, and understand the real opportunity.</p>
-    </div>
-  </div>
-</section>
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-title">The Invitation</div>
-  <h2>Let’s build something meaningful.</h2>
-  <p>
-    The strongest opportunities begin with a simple conversation. Whether you have an idea, a partnership, or a vision to explore — the door is open.
-  </p>
-  <div class="contact-buttons">
-    <a href="mailto:hi@irfanfitrat.com">hi@irfanfitrat.com</a>
-    <a href="mailto:irfan@tawaja.com">irfan@tawaja.com</a>
-    <a href="https://wa.me/971521712008" target="_blank" rel="noopener">WhatsApp</a>
-  </div>
-  <div class="closing-message">
-    Different places.<br>
-    One shared opportunity.<br>
-    One world.
-  </div>
-  <footer>
-    <div>© 2026 Irfan Fitrat</div>
-    <div class="footer-links">
-      <a href="https://www.facebook.com/irfanfitrat" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.instagram.com/irfanfitrat" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.tiktok.com/@irfanfitrat" target="_blank" rel="noopener">TikTok</a>
-      <a href="https://www.youtube.com/@irfanfitrat" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://x.com/irfanfitrat" target="_blank" rel="noopener">X</a>
-      <a href="https://www.linkedin.com/in/irfanfitrat" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </footer>
-</section>
-<!-- WHATSAPP -->
-<a href="https://wa.me/971521712008" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.128 6.744 3.046 9.378L1.06 30.94l5.686-1.948A15.91 15.91 0 0 0 16.004 32C24.826 32 32 24.824 32 16.004 32 7.176 24.826 0 16.004 0zm8.612 22.61c-.36.996-1.782 1.822-2.918 2.066-.776.164-1.788.294-5.196-.996-4.36-1.654-7.168-6.72-7.386-7.03-.21-.31-1.74-2.316-1.74-4.42 0-2.104 1.106-3.14 1.498-3.566.36-.392.976-.54 1.3-.54.316 0 .64.004.92.016.296.014.694-.112 1.084.826.4.96 1.36 3.32 1.48 3.56.12.24.2.52.04.84-.16.32-.24.52-.48.8-.24.28-.504.624-.72.84-.24.24-.49.5-.21.98.28.48 1.24 2.048 2.664 3.316 1.832 1.632 3.376 2.14 3.856 2.38.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.8 1.32 3.28 1.56.48.24.8.36.92.56.12.2.12 1.14-.24 2.136z"/>
-  </svg>
-</a>
-<script>
-/* LOADER */
-const loader = gsap.timeline();
-loader
-  .to(".loader-line", { width: "220px", duration: 1.4, ease: "power2.inOut" })
-  .to(".loader", {
-    opacity: 0,
-    duration: .9,
-    delay: .3,
-    pointerEvents: "none",
-    onComplete: () => document.querySelector(".loader").style.display = "none"
-  });
-/* SMOOTH SCROLL */
-const lenis = new Lenis({
-  duration: 1.25,
-  smoothWheel: true,
-  touchMultiplier: 1.4
-});
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-/* MOBILE MENU */
-const menuToggle = document.querySelector(".menu-toggle");
-const mainNav = document.getElementById("main-nav");
-menuToggle.addEventListener("click", () => {
-  menuToggle.classList.toggle("active");
-  mainNav.classList.toggle("open");
-  document.body.style.overflow = mainNav.classList.contains("open") ? "hidden" : "";
-});
-mainNav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    menuToggle.classList.remove("active");
-    mainNav.classList.remove("open");
-    document.body.style.overflow = "";
-  });
-});
-/* CURSOR */
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-document.querySelectorAll("a, button, .world-card, .venture, .opportunity-card").forEach(el => {
-  el.addEventListener("mouseenter", () => cursor.classList.add("active"));
-  el.addEventListener("mouseleave", () => cursor.classList.remove("active"));
-});
-/* 3D EARTH */
-const container = document.getElementById("earth-container");
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize(innerWidth, innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-container.appendChild(renderer.domElement);
-const textureLoader = new THREE.TextureLoader();
-const earthTexture = textureLoader.load("https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg");
-const bumpTexture = textureLoader.load("https://threejs.org/examples/textures/planets/earth_normal_2048.jpg");
-const specularTexture = textureLoader.load("https://threejs.org/examples/textures/planets/earth_specular_2048.jpg");
-const earth = new THREE.Mesh(
-  new THREE.SphereGeometry(2.6, 64, 64),
-  new THREE.MeshPhongMaterial({
-    map: earthTexture,
-    bumpMap: bumpTexture,
-    bumpScale: 0.05,
-    specularMap: specularTexture,
-    specular: new THREE.Color(0x333333),
-    shininess: 12
-  })
-);
-scene.add(earth);
-const atmosphere = new THREE.Mesh(
-  new THREE.SphereGeometry(2.72, 64, 64),
-  new THREE.MeshBasicMaterial({
-    color: 0x88bbff,
-    transparent: true,
-    opacity: 0.12,
-    side: THREE.BackSide
-  })
-);
-scene.add(atmosphere);
-scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-const sunLight = new THREE.DirectionalLight(0xfff5e6, 1.15);
-sunLight.position.set(5, 3, 4);
-scene.add(sunLight);
-const fillLight = new THREE.DirectionalLight(0x8899cc, 0.35);
-fillLight.position.set(-4, -1, -3);
-scene.add(fillLight);
-camera.position.z = 7.2;
-function latLongToVector3(lat, lon, radius) {
-  const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lon + 180) * (Math.PI / 180);
-  const x = -(radius * Math.sin(phi) * Math.cos(theta));
-  const z = radius * Math.sin(phi) * Math.sin(theta);
-  const y = radius * Math.cos(phi);
-  return new THREE.Vector3(x, y, z);
-}
-const pakistanPos = latLongToVector3(30.3753, 69.3451, 2.62);
-const dubaiPos = latLongToVector3(25.2048, 55.2708, 2.62);
-function createGlowPoint(position, color) {
-  const group = new THREE.Group();
-  const core = new THREE.Mesh(
-    new THREE.SphereGeometry(0.035, 16, 16),
-    new THREE.MeshBasicMaterial({ color })
-  );
-  core.position.copy(position);
-  group.add(core);
-  const glow = new THREE.Mesh(
-    new THREE.SphereGeometry(0.09, 16, 16),
-    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.35 })
-  );
-  glow.position.copy(position);
-  group.add(glow);
-  return group;
-}
-const pakistanPoint = createGlowPoint(pakistanPos, 0x4a9c6d);
-const dubaiPoint = createGlowPoint(dubaiPos, 0x6a9fd8);
-scene.add(pakistanPoint);
-scene.add(dubaiPoint);
-const curvePoints = [];
-const midPoint = new THREE.Vector3().addVectors(pakistanPos, dubaiPos).multiplyScalar(0.5);
-midPoint.normalize().multiplyScalar(3.15);
-for (let i = 0; i <= 40; i++) {
-  const t = i / 40;
-  const p = new THREE.Vector3().lerpVectors(pakistanPos, dubaiPos, t);
-  p.lerp(midPoint, Math.sin(t * Math.PI) * 0.55);
-  curvePoints.push(p);
-}
-const curve = new THREE.CatmullRomCurve3(curvePoints);
-const connectionLine = new THREE.Line(
-  new THREE.BufferGeometry().setFromPoints(curve.getPoints(60)),
-  new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 })
-);
-scene.add(connectionLine);
-const particleCount = 28;
-const particleGeo = new THREE.BufferGeometry();
-const particlePositions = new Float32Array(particleCount * 3);
-const particleData = [];
-for (let i = 0; i < particleCount; i++) {
-  const t = i / particleCount;
-  const p = curve.getPoint(t);
-  particlePositions[i * 3] = p.x;
-  particlePositions[i * 3 + 1] = p.y;
-  particlePositions[i * 3 + 2] = p.z;
-  particleData.push({ t, speed: 0.0012 + Math.random() * 0.0008 });
-}
-particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
-const particles = new THREE.Points(
-  particleGeo,
-  new THREE.PointsMaterial({
-    color: 0xffffff,
-    size: 0.045,
-    transparent: true,
-    opacity: 0.7,
-    blending: THREE.AdditiveBlending
-  })
-);
-scene.add(particles);
-let time = 0;
-function animateEarth() {
-  requestAnimationFrame(animateEarth);
-  time += 0.01;
-  earth.rotation.y += 0.0012;
-  atmosphere.rotation.y += 0.0008;
-  const pulse = 0.9 + Math.sin(time * 1.4) * 0.12;
-  pakistanPoint.scale.setScalar(pulse);
-  dubaiPoint.scale.setScalar(pulse);
-  const positions = particles.geometry.attributes.position.array;
-  particleData.forEach((data, i) => {
-    data.t += data.speed;
-    if (data.t > 1) data.t = 0;
-    const p = curve.getPoint(data.t);
-    positions[i * 3] = p.x;
-    positions[i * 3 + 1] = p.y;
-    positions[i * 3 + 2] = p.z;
-  });
-  particles.geometry.attributes.position.needsUpdate = true;
-  renderer.render(scene, camera);
-}
-animateEarth();
-window.addEventListener("resize", () => {
-  camera.aspect = innerWidth / innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-});
-/* GSAP */
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray("h1, h2").forEach(title => {
-  gsap.from(title, {
-    scrollTrigger: { trigger: title, start: "top 88%" },
-    opacity: 0, y: 70, duration: 1.35, ease: "power3.out"
-  });
-});
-gsap.utils.toArray(".supporting, .lead, .bridge p, .philosophy p").forEach(el => {
-  gsap.from(el, {
-    scrollTrigger: { trigger: el, start: "top 90%" },
-    opacity: 0, y: 40, duration: 1.1, ease: "power2.out"
-  });
-});
-gsap.utils.toArray(".world-card, .venture, .opportunity-card").forEach((card, i) => {
-  gsap.from(card, {
-    scrollTrigger: { trigger: card, start: "top 88%" },
-    opacity: 0, y: 55, duration: 1.05, delay: i * 0.06, ease: "power3.out"
-  });
-});
-gsap.utils.toArray(".image-frame video, .portrait img").forEach(media => {
-  gsap.to(media, {
-    scrollTrigger: { trigger: media, scrub: 1.2 },
-    y: -50, ease: "none"
-  });
-});
-gsap.to("#earth-container", {
-  scrollTrigger: { trigger: ".hero", scrub: true, start: "top top", end: "bottom top" },
-  scale: 1.35, opacity: 0.12
-});
-</script>
-</body>
-</html>
+          A vision where craftsmanship, culture, and 
