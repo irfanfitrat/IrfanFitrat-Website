@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thought | Irfan Fitrat</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Turnstile -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
   <style>
     :root {
-      --bg: #0f0f0f;
-      --card: #161616;
-      --border: #2f2f2f;
+      --bg: #0a0a0a;
+      --card: #111;
+      --border: #222;
       --text: #e7e9ea;
-      --muted: #71767b;
-      --hover: #1a1a1a;
+      --muted: #6e767d;
+      --hover: #161616;
       --accent: #1d9bf0;
     }
 
@@ -31,6 +28,7 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
@@ -45,20 +43,20 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(15, 15, 15, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 0 16px;
-      height: 53px;
+      height: 56px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
     }
 
     .back-btn {
       color: var(--text);
       text-decoration: none;
-      font-size: 20px;
+      font-size: 18px;
       width: 34px;
       height: 34px;
       display: flex;
@@ -73,32 +71,33 @@
     }
 
     .header-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
     }
 
+    /* Main Thought */
     .thought {
-      padding: 16px;
+      padding: 20px 16px;
       border-bottom: 1px solid var(--border);
     }
 
     .thought-header {
       display: flex;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     .avatar {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #1d9bf0;
+      background: linear-gradient(135deg, #1d9bf0, #0d7cc7);
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 17px;
       flex-shrink: 0;
     }
 
@@ -106,6 +105,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 2px;
     }
 
     .name {
@@ -120,10 +120,10 @@
 
     .thought-content {
       font-size: 18px;
-      line-height: 1.5;
+      line-height: 1.55;
       white-space: pre-wrap;
       word-break: break-word;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .thought-time {
@@ -131,33 +131,31 @@
       color: var(--muted);
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .thought-stats {
-      display: flex;
-      gap: 20px;
       font-size: 14px;
       color: var(--muted);
-      padding-bottom: 12px;
     }
 
+    /* Comments */
     .comments-section {
-      padding: 16px;
+      padding: 20px 16px 40px;
     }
 
     .comments-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .comment-form {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 24px;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 28px;
     }
 
     .comment-form h3 {
@@ -177,11 +175,12 @@
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
+      border-radius: 10px;
+      padding: 11px 13px;
       color: var(--text);
       font-size: 14px;
       outline: none;
+      transition: border-color 0.2s;
     }
 
     input:focus, textarea:focus {
@@ -189,13 +188,13 @@
     }
 
     textarea {
-      min-height: 90px;
+      min-height: 95px;
       resize: vertical;
       margin-bottom: 12px;
     }
 
     .turnstile-wrapper {
-      margin: 12px 0 16px;
+      margin: 14px 0 16px;
     }
 
     .btn {
@@ -203,26 +202,20 @@
       color: white;
       border: none;
       border-radius: 999px;
-      padding: 8px 20px;
+      padding: 9px 22px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: opacity 0.2s;
     }
 
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    .btn:hover { opacity: 0.9; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .form-note {
       font-size: 12px;
       color: var(--muted);
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .comment {
@@ -232,15 +225,13 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .comment:last-child {
-      border-bottom: none;
-    }
+    .comment:last-child { border-bottom: none; }
 
     .comment-avatar {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #333;
+      background: #2a2a2a;
       color: white;
       display: flex;
       align-items: center;
@@ -250,37 +241,35 @@
       flex-shrink: 0;
     }
 
-    .comment-body {
-      flex: 1;
-    }
+    .comment-body { flex: 1; }
 
     .comment-author {
       font-weight: 700;
       font-size: 14px;
-      margin-bottom: 2px;
     }
 
     .comment-time {
       font-size: 13px;
       color: var(--muted);
+      margin-top: 1px;
     }
 
     .comment-text {
       font-size: 15px;
-      line-height: 1.45;
-      margin-top: 4px;
+      line-height: 1.5;
+      margin-top: 6px;
       white-space: pre-wrap;
     }
 
     .no-comments {
       text-align: center;
       color: var(--muted);
-      padding: 30px 0;
+      padding: 36px 0;
       font-size: 14px;
     }
 
     .state {
-      padding: 60px 20px;
+      padding: 80px 24px;
       text-align: center;
       color: var(--muted);
     }
@@ -319,7 +308,6 @@
           </div>
           <textarea id="comment-content" placeholder="Write your comment..." required></textarea>
 
-          <!-- Turnstile Widget -->
           <div class="turnstile-wrapper">
             <div class="cf-turnstile" data-sitekey="0x4AAAAAAEzIMpMvx-Bdhkvd" data-theme="dark"></div>
           </div>
@@ -339,12 +327,10 @@
     const API_BASE = "https://thoughts-api.irfanfitratyousafzai.workers.dev";
     const urlParams = new URLSearchParams(window.location.search);
     const slug = urlParams.get('slug');
-
     let currentPost = null;
 
     async function loadThought() {
       const container = document.getElementById('thought-container');
-
       if (!slug) {
         container.innerHTML = `<div class="state">Thought not found</div>`;
         return;
@@ -373,9 +359,7 @@
             </div>
             <div class="thought-content">${escapeHtml(currentPost.content)}</div>
             <div class="thought-time">${formatFullDate(currentPost.published_at || currentPost.created_at)}</div>
-            <div class="thought-stats">
-              <span>${data.comments?.length || 0} Comments</span>
-            </div>
+            <div class="thought-stats">${data.comments?.length || 0} Comments</div>
           </div>
         `;
 
@@ -387,7 +371,6 @@
 
     function renderComments(comments) {
       const list = document.getElementById('comments-list');
-
       if (!comments.length) {
         list.innerHTML = `<div class="no-comments">No comments yet. Be the first to reply.</div>`;
         return;
@@ -412,12 +395,9 @@
       const name = document.getElementById('comment-name').value.trim();
       const email = document.getElementById('comment-email').value.trim();
       const content = document.getElementById('comment-content').value.trim();
-
-      // Get Turnstile token
       const turnstileToken = document.querySelector('input[name="cf-turnstile-response"]')?.value;
 
       if (!name || !email || !content) return;
-
       if (!turnstileToken) {
         alert("Please complete the captcha.");
         return;
@@ -445,10 +425,7 @@
         if (res.ok) {
           alert("Comment submitted! It will appear after moderation.");
           this.reset();
-          // Reset Turnstile
-          if (window.turnstile) {
-            window.turnstile.reset();
-          }
+          if (window.turnstile) window.turnstile.reset();
         } else {
           alert(data.error || "Failed to submit comment.");
         }
@@ -462,12 +439,7 @@
 
     function escapeHtml(text) {
       if (!text) return '';
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+      return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
     }
 
     function formatTime(dateStr) {
@@ -475,7 +447,6 @@
       const d = new Date(dateStr);
       const now = new Date();
       const diff = (now - d) / 1000;
-
       if (diff < 60) return 'just now';
       if (diff < 3600) return Math.floor(diff / 60) + 'm';
       if (diff < 86400) return Math.floor(diff / 3600) + 'h';
@@ -486,12 +457,8 @@
       if (!dateStr) return '';
       const d = new Date(dateStr);
       return d.toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
+        hour: 'numeric', minute: '2-digit', hour12: true,
+        month: 'short', day: 'numeric', year: 'numeric'
       });
     }
 
