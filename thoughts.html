@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thoughts | Irfan Fitrat</title>
-  <meta name="description" content="Short thoughts and observations by Irfan Fitrat.">
+  <meta name="description" content="Short thoughts and observations by Irfan Fitrat on business, opportunity, and connection.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f0f0f;
-      --card: #161616;
-      --border: #2f2f2f;
+      --bg: #0a0a0a;
+      --card: #111;
+      --border: #222;
       --text: #e7e9ea;
-      --muted: #71767b;
-      --hover: #1a1a1a;
+      --muted: #6e767d;
+      --hover: #161616;
       --accent: #1d9bf0;
     }
 
@@ -28,9 +28,9 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Layout */
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -44,23 +44,24 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(15, 15, 15, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 0 16px;
-      height: 53px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .header-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .header-link {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
@@ -70,14 +71,14 @@
       color: var(--text);
     }
 
-    /* Post */
+    /* Post Card */
     .post {
       display: block;
-      padding: 16px;
+      padding: 18px 16px;
       border-bottom: 1px solid var(--border);
       text-decoration: none;
       color: inherit;
-      transition: background 0.15s;
+      transition: background 0.15s ease;
     }
 
     .post:hover {
@@ -87,14 +88,14 @@
     .post-header {
       display: flex;
       gap: 12px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .avatar {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: #1d9bf0;
+      background: linear-gradient(135deg, #1d9bf0, #0d7cc7);
       color: white;
       display: flex;
       align-items: center;
@@ -108,6 +109,13 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 1px;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .name {
@@ -121,35 +129,47 @@
     }
 
     .post-content {
-      margin-left: 52px;
+      margin-left: 54px;
       font-size: 16px;
       line-height: 1.5;
       white-space: pre-wrap;
       word-break: break-word;
       margin-top: 2px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      color: #e7e9ea;
     }
 
     .post-footer {
-      margin-left: 52px;
+      margin-left: 54px;
       display: flex;
-      gap: 20px;
+      align-items: center;
+      gap: 18px;
       color: var(--muted);
       font-size: 13px;
     }
 
     .post-footer span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      transition: color 0.15s;
     }
 
-    /* Empty & Loading */
+    .post:hover .post-footer span {
+      color: var(--accent);
+    }
+
+    /* Empty / Loading */
     .state {
-      padding: 60px 20px;
+      padding: 80px 24px;
       text-align: center;
       color: var(--muted);
       font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .state strong {
+      display: block;
+      color: var(--text);
+      font-size: 17px;
+      margin-bottom: 8px;
     }
 
     /* Mobile */
@@ -163,13 +183,11 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <header>
       <div class="header-title">Thoughts</div>
       <a href="index.html" class="header-link">← Website</a>
     </header>
 
-    <!-- Feed -->
     <div id="feed">
       <div class="state">Loading thoughts...</div>
     </div>
@@ -186,7 +204,11 @@
         const posts = await res.json();
 
         if (!posts || posts.length === 0) {
-          feed.innerHTML = `<div class="state">No thoughts yet.</div>`;
+          feed.innerHTML = `
+            <div class="state">
+              <strong>No thoughts yet</strong>
+              New ideas will appear here.
+            </div>`;
           return;
         }
 
@@ -195,18 +217,24 @@
             <div class="post-header">
               <div class="avatar">IF</div>
               <div class="user-meta">
-                <div class="name">Irfan Fitrat</div>
+                <div class="name-row">
+                  <span class="name">Irfan Fitrat</span>
+                </div>
                 <div class="handle">@irfanfitrat · ${formatTime(post.published_at || post.created_at)}</div>
               </div>
             </div>
             <div class="post-content">${escapeHtml(post.excerpt || post.title)}</div>
             <div class="post-footer">
-              <span>View thought</span>
+              <span>View thought →</span>
             </div>
           </a>
         `).join('');
       } catch (err) {
-        feed.innerHTML = `<div class="state">Unable to load thoughts.</div>`;
+        feed.innerHTML = `
+          <div class="state">
+            <strong>Unable to load thoughts</strong>
+            Please try again later.
+          </div>`;
       }
     }
 
