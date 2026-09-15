@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thought | Irfan Fitrat</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <style>
     :root {
       --bg: #0f0f0f;
@@ -37,7 +41,6 @@
       border-right: 1px solid var(--border);
     }
 
-    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -74,7 +77,6 @@
       font-weight: 700;
     }
 
-    /* Main Thought */
     .thought {
       padding: 16px;
       border-bottom: 1px solid var(--border);
@@ -140,7 +142,6 @@
       padding-bottom: 12px;
     }
 
-    /* Comments Section */
     .comments-section {
       padding: 16px;
     }
@@ -151,7 +152,6 @@
       margin-bottom: 20px;
     }
 
-    /* Comment Form */
     .comment-form {
       background: var(--card);
       border: 1px solid var(--border);
@@ -194,6 +194,10 @@
       margin-bottom: 12px;
     }
 
+    .turnstile-wrapper {
+      margin: 12px 0 16px;
+    }
+
     .btn {
       background: var(--accent);
       color: white;
@@ -210,13 +214,17 @@
       opacity: 0.9;
     }
 
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .form-note {
       font-size: 12px;
       color: var(--muted);
       margin-top: 10px;
     }
 
-    /* Single Comment */
     .comment {
       display: flex;
       gap: 12px;
@@ -290,22 +298,18 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <header>
       <a href="thoughts.html" class="back-btn">←</a>
       <div class="header-title">Thought</div>
     </header>
 
-    <!-- Main Thought -->
     <div id="thought-container">
       <div class="state">Loading...</div>
     </div>
 
-    <!-- Comments -->
     <div class="comments-section">
       <div class="comments-title">Comments</div>
 
-      <!-- Comment Form -->
       <div class="comment-form">
         <h3>Leave a comment</h3>
         <form id="comment-form">
@@ -314,12 +318,17 @@
             <input type="email" id="comment-email" placeholder="Email (private)" required>
           </div>
           <textarea id="comment-content" placeholder="Write your comment..." required></textarea>
-          <button type="submit" class="btn">Post Comment</button>
+
+          <!-- Turnstile Widget -->
+          <div class="turnstile-wrapper">
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEzIMpMvx-Bdhkvd" data-theme="dark"></div>
+          </div>
+
+          <button type="submit" class="btn" id="submit-btn">Post Comment</button>
           <p class="form-note">Your email will not be published. Comments are moderated.</p>
         </form>
       </div>
 
-      <!-- Comments List -->
       <div id="comments-list">
         <div class="no-comments">Loading comments...</div>
       </div>
@@ -404,7 +413,19 @@
       const email = document.getElementById('comment-email').value.trim();
       const content = document.getElementById('comment-content').value.trim();
 
+      // Get Turnstile token
+      const turnstileToken = document.querySelector('input[name="cf-turnstile-response"]')?.value;
+
       if (!name || !email || !content) return;
+
+      if (!turnstileToken) {
+        alert("Please complete the captcha.");
+        return;
+      }
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Posting...";
 
       try {
         const res = await fetch(`${API_BASE}/api/comments`, {
@@ -414,18 +435,28 @@
             post_id: currentPost.id,
             name,
             email,
-            content
+            content,
+            turnstileToken
           })
         });
+
+        const data = await res.json();
 
         if (res.ok) {
           alert("Comment submitted! It will appear after moderation.");
           this.reset();
+          // Reset Turnstile
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
         } else {
-          alert("Failed to submit comment.");
+          alert(data.error || "Failed to submit comment.");
         }
       } catch (err) {
         alert("Error submitting comment.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Post Comment";
       }
     });
 
