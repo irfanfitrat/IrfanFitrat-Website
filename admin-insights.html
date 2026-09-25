@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · Insights | Irfan Fitrat</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #0f766e;
+      --accent-hover: #0d9488;
+      --danger: #dc2626;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    h1, h2, h3 { font-family: 'Newsreader', Georgia, serif; }
+
+    /* Login */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
+    }
+    .login-card h1 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .login-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+    input[type="password"],
+    input[type="text"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      width: 100%;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .btn-danger {
+      background: #fef2f2;
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+    .btn-danger:hover { background: #fee2e2; }
+    .btn-sm { padding: 7px 12px; font-size: 0.8rem; }
+    .error-msg {
+      background: #fef2f2;
+      color: var(--danger);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* Dashboard */
+    .dashboard { display: none; }
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-brand {
+      font-family: 'Newsreader', serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+    }
+    .topbar-actions { display: flex; gap: 10px; align-items: center; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .page-header h1 { font-size: 1.75rem; }
+
+    /* Articles list */
+    .articles-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .article-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: box-shadow 0.2s;
+    }
+    .article-row:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.06); }
+    .article-meta h3 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .article-meta .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge-published { background: #ccfbf1; color: #0f766e; }
+    .badge-draft { background: #f1f5f9; color: #64748b; }
+    .row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+    /* Editor */
+    .editor-view { display: none; }
+    .editor-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 28px;
+    }
+    @media (max-width: 800px) {
+      .editor-grid { grid-template-columns: 1fr; }
+    }
+    .field { margin-bottom: 20px; }
+    .field label { margin-bottom: 8px; }
+    #editor {
+      min-height: 380px;
+      background: #fff;
+      border-radius: 0 0 8px 8px;
+    }
+    .ql-toolbar.ql-snow {
+      border-radius: 8px 8px 0 0;
+      border-color: var(--border);
+      background: #f8fafc;
+    }
+    .ql-container.ql-snow {
+      border-color: var(--border);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .ql-editor { min-height: 360px; line-height: 1.7; }
+    .ql-editor h1, .ql-editor h2, .ql-editor h3 {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+    .sidebar-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .sidebar-card h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .editor-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--text); }
+    .loading { text-align: center; padding: 40px; color: var(--muted); }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <h1>Insights Admin</h1>
+      <p>Private area · Irfan Fitrat</p>
+      <div class="error-msg" id="loginError">Incorrect password</div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="passwordInput" placeholder="Enter admin password" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary" id="loginBtn">Enter Admin</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+    <div class="topbar">
+      <div class="topbar-brand">Insights Admin</div>
+      <div class="topbar-actions">
+        <a href="/insights" target="_blank" class="btn btn-secondary btn-sm">View Live Site</a>
+        <button class="btn btn-secondary btn-sm" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div class="container" id="listView">
+      <div class="page-header">
+        <h1>Articles</h1>
+        <button class="btn btn-primary" id="newArticleBtn">+ New Article</button>
+      </div>
+      <div id="articlesList" class="articles-grid">
+        <div class="loading">Loading articles…</div>
+      </div>
+    </div>
+
+    <!-- EDITOR VIEW -->
+    <div class="container editor-view" id="editorView">
+      <div class="page-header">
+        <h1 id="editorTitle">New Article</h1>
+        <button class="btn btn-secondary btn-sm" id="backToListBtn">← Back to list</button>
+      </div>
+
+      <div class="editor-card">
+        <div class="editor-grid">
+          <div>
+            <div class="field">
+              <label>Title</label>
+              <input type="text" id="articleTitle" placeholder="Article title…" />
+            </div>
+            <div class="field">
+              <label>Content</label>
+              <div id="editor"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="sidebar-card">
+              <h4>Details</h4>
+              <div class="field">
+                <label>Category</label>
+                <select id="articleCategory">
+                  <option value="Investment">Investment</option>
+                  <option value="Strategy">Strategy</option>
+                  <option value="Entrepreneurship">Entrepreneurship</option>
+                  <option value="Craftsmanship">Craftsmanship</option>
+                  <option value="Trade">Trade</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Leadership">Leadership</option>
+                  <option value="Personal">Personal</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Status</label>
+                <select id="articleStatus">
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Cover Image URL</label>
+                <input type="url" id="articleCover" placeholder="https://…" />
+              </div>
+              <div class="field">
+                <label>Excerpt (short summary)</label>
+                <textarea id="articleExcerpt" rows="3" placeholder="1–2 sentences…"></textarea>
+              </div>
+            </div>
+
+            <div class="sidebar-card">
+              <h4>SEO (optional)</h4>
+              <div class="field">
+                <label>Slug</label>
+                <input type="text" id="articleSlug" placeholder="auto-generated-from-title" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor-actions">
+          <button class="btn btn-primary" id="saveBtn">Save Article</button>
+          <button class="btn btn-secondary" id="previewBtn">Preview</button>
+          <button class="btn btn-danger" id="deleteBtn" style="margin-left:auto;display:none;">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <script>
+    // ================== CONFIG ==================
+    // Change this to your Worker URL after deploying
+    const API_BASE = "https://insights-api.irfanfitratyousafzai.workers.dev";
+    // Default password (change this after first login in the Worker secrets)
+    const DEFAULT_PASS_HINT = "Set INSIGHTS_ADMIN_PASSWORD in Cloudflare Worker secrets";
+
+    // ================== STATE ==================
+    let token = localStorage.getItem("insights_admin_token") || "";
+    let currentId = null;
+    let quill = null;
+
+    // ================== HELPERS ==================
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2800);
+    }
+
+    function slugify(text) {
+      return text.toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/[\s_-]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 80);
+    }
+
+    async function api(path, options = {}) {
+      const res = await fetch(API_BASE + path, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          ...(options.headers || {})
+        }
+      });
+      if (res.status === 401) {
+        logout();
+        throw new Error("Unauthorized");
+      }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Request failed");
+      return data;
+    }
+
+    // ================== AUTH ==================
+    async function login() {
+      const password = document.getElementById("passwordInput").value;
+      const err = document.getElementById("loginError");
+      err.style.display = "none";
+
+      try {
+        const data = await fetch(API_BASE + "/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password })
+        }).then(r => r.json());
+
+        if (data.token) {
+          token = data.token;
+          localStorage.setItem("insights_admin_token", token);
+          showDashboard();
+        } else {
+          err.style.display = "block";
+        }
+      } catch (e) {
+        err.textContent = "Cannot connect to API. Check if Worker is deployed.";
+        err.style.display = "block";
+      }
+    }
+
+    function logout() {
+      token = "";
+      localStorage.removeItem("insights_admin_token");
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("loginScreen").style.display = "flex";
+      document.getElementById("passwordInput").value = "";
+    }
+
+    function showDashboard() {
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+      loadArticles();
+    }
+
+    // ================== ARTICLES LIST ==================
+    async function loadArticles() {
+      const list = document.getElementById("articlesList");
+      list.innerHTML = `<div class="loading">Loading articles…</div>`;
+
+      try {
+        const articles = await api("/api/admin/articles");
+        if (!articles.length) {
+          list.innerHTML = `
+            <div class="empty-state">
+              <h3>No articles yet</h3>
+              <p>Create your first long-form Insight.</p>
+            </div>`;
+          return;
+        }
+
+        list.innerHTML = articles.map(a => `
+          <div class="article-row">
+            <div class="article-meta">
+              <h3>${escapeHtml(a.title || "Untitled")}</h3>
+              <div class="meta">
+                <span class="badge ${a.status === "published" ? "badge-published" : "badge-draft"}">${a.status}</span>
+                <span>${a.category || "—"}</span>
+                <span>${a.published_at ? new Date(a.published_at).toLocaleDateString() : "—"}</span>
+              </div>
+            </div>
+            <div class="row-actions">
+              <button class="btn btn-secondary btn-sm" onclick="editArticle('${a.id}')">Edit</button>
+            </div>
+          </div>
+        `).join("");
+      } catch (e) {
+        list.innerHTML = `<div class="empty-state"><h3>Failed to load</h3><p>${e.message}</p></div>`;
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    // ================== EDITOR ==================
+    function initEditor() {
+      if (quill) return;
+      quill = new Quill("#editor", {
+        theme: "snow",
+        placeholder: "Write your article…",
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, 3, false] }],
+            ["bold", "italic", "underline"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["blockquote", "link", "image"],
+            ["clean"]
+          ]
+        }
+      });
+    }
+
+    function openEditor(article = null) {
+      initEditor();
+      currentId = article ? article.id : null;
+      document.getElementById("listView").style.display = "none";
+      document.getElementById("editorView").style.display = "block";
+      document.getElementById("editorTitle").textContent = article ? "Edit Article" : "New Article";
+      document.getElementById("deleteBtn").style.display = article ? "inline-flex" : "none";
+
+      document.getElementById("articleTitle").value = article?.title || "";
+      document.getElementById("articleCategory").value = article?.category || "Investment";
+      document.getElementById("articleStatus").value = article?.status || "draft";
+      document.getElementById("articleCover").value = article?.cover_image || "";
+      document.getElementById("articleExcerpt").value = article?.excerpt || "";
+      document.getElementById("articleSlug").value = article?.slug || "";
+      quill.root.innerHTML = article?.content || "";
+    }
+
+    function closeEditor() {
+      document.getElementById("editorView").style.display = "none";
+      document.getElementById("listView").style.display = "block";
+      currentId = null;
+      loadArticles();
+    }
+
+    async function editArticle(id) {
+      try {
+        const article = await api(`/api/admin/articles/${id}`);
+        openEditor(article);
+      } catch (e) {
+        showToast("Failed to load article");
+      }
+    }
+
+    async function saveArticle() {
+      const title = document.getElementById("articleTitle").value.trim();
+      if (!title) return showToast("Title is required");
+
+      const payload = {
+        title,
+        content: quill.root.innerHTML,
+        category: document.getElementById("articleCategory").value,
+        status: document.getElementById("articleStatus").value,
+        cover_image: document.getElementById("articleCover").value.trim() || null,
+        excerpt: document.getElementById("articleExcerpt").value.trim() || null,
+        slug: document.getElementById("articleSlug").value.trim() || slugify(title)
+      };
+
+      try {
+        if (currentId) {
+          await api(`/api/admin/articles/${currentId}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+          });
+          showToast("Article updated");
+        } else {
+          const created = await api("/api/admin/articles", {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+          currentId = created.id;
+          document.getElementById("deleteBtn").style.display = "inline-flex";
+          document.getElementById("editorTitle").textContent = "Edit Article";
+          showToast("Article created");
+        }
+      } catch (e) {
+        showToast(e.message || "Save failed");
+      }
+    }
+
+    async function deleteArticle() {
+      if (!currentId || !confirm("Delete this article permanently?")) return;
+      try {
+        await api(`/api/admin/articles/${currentId}`, { method: "DELETE" });
+        showToast("Article deleted");
+        closeEditor();
+      } catch (e) {
+        showToast("Delete failed");
+      }
+    }
+
+    // ================== EVENTS ==================
+    document.getElementById("loginBtn").addEventListener("click", login);
+    document.getElementById("passwordInput").addEventListener("keydown", e => {
+      if (e.key === "Enter") login();
+    });
+    document.getElementById("logoutBtn").addEventListener("click", logout);
+    document.getElementById("newArticleBtn").addEventListener("click", () => openEditor());
+    document.getElementById("backToListBtn").addEventListener("click", closeEditor);
+    document.getElementById("saveBtn").addEventListener("click", saveArticle);
+    document.getElementById("deleteBtn").addEventListener("click", deleteArticle);
+
+    document.getElementById("articleTitle").addEventListener("blur", () => {
+      const slugField = document.getElementById("articleSlug");
+      if (!slugField.value && document.getElementById("articleTitle").value) {
+        slugField.value = slugify(document.getElementById("articleTitle").value);
+      }
+    });
+
+    // Auto-login if token exists
+    if (token) {
+      // Quick check
+      api("/api/admin/articles").then(showDashboard).catch(logout);
+    }
+  </script>
+</body>
+</html>
