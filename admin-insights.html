@@ -362,8 +362,16 @@
                 </select>
               </div>
               <div class="field">
-                <label>Cover Image URL</label>
-                <input type="url" id="articleCover" placeholder="https://…" />
+                <label>Cover Image</label>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <input type="file" id="coverFile" accept="image/jpeg,image/png,image/webp,image/gif" style="font-size:0.85rem;" />
+                  <button type="button" class="btn btn-secondary btn-sm" id="uploadCoverBtn" style="width:100%;">Upload Image</button>
+                  <input type="url" id="articleCover" placeholder="Or paste image URL…" />
+                  <div id="coverPreview" style="display:none;margin-top:6px;">
+                    <img id="coverPreviewImg" src="" alt="Cover preview" style="width:100%;border-radius:8px;max-height:140px;object-fit:cover;" />
+                  </div>
+                  <div id="uploadStatus" style="font-size:0.8rem;color:var(--muted);"></div>
+                </div>
               </div>
               <div class="field">
                 <label>Excerpt (short summary)</label>
@@ -551,7 +559,66 @@
       document.getElementById("articleCover").value = article?.cover_image || "";
       document.getElementById("articleExcerpt").value = article?.excerpt || "";
       document.getElementById("articleSlug").value = article?.slug || "";
+      document.getElementById("coverFile").value = "";
+      document.getElementById("uploadStatus").textContent = "";
       quill.root.innerHTML = article?.content || "";
+      updateCoverPreview(article?.cover_image || "");
+    }
+
+    function updateCoverPreview(url) {
+      const preview = document.getElementById("coverPreview");
+      const img = document.getElementById("coverPreviewImg");
+      if (url) {
+        img.src = url;
+        preview.style.display = "block";
+      } else {
+        preview.style.display = "none";
+        img.src = "";
+      }
+    }
+
+    async function uploadCover() {
+      const fileInput = document.getElementById("coverFile");
+      const status = document.getElementById("uploadStatus");
+      const btn = document.getElementById("uploadCoverBtn");
+
+      if (!fileInput.files || !fileInput.files[0]) {
+        showToast("Please select an image first");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        showToast("Image must be under 5MB");
+        return;
+      }
+
+      status.textContent = "Uploading…";
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const res = await fetch(API_BASE + "/api/admin/upload", {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${token}` },
+          body: formData
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Upload failed");
+
+        document.getElementById("articleCover").value = data.url;
+        updateCoverPreview(data.url);
+        status.textContent = "Uploaded successfully";
+        showToast("Image uploaded");
+      } catch (e) {
+        status.textContent = e.message || "Upload failed";
+        showToast(e.message || "Upload failed");
+      } finally {
+        btn.disabled = false;
+      }
     }
 
     function closeEditor() {
@@ -627,6 +694,10 @@
     document.getElementById("backToListBtn").addEventListener("click", closeEditor);
     document.getElementById("saveBtn").addEventListener("click", saveArticle);
     document.getElementById("deleteBtn").addEventListener("click", deleteArticle);
+    document.getElementById("uploadCoverBtn").addEventListener("click", uploadCover);
+    document.getElementById("articleCover").addEventListener("input", (e) => {
+      updateCoverPreview(e.target.value.trim());
+    });
 
     document.getElementById("articleTitle").addEventListener("blur", () => {
       const slugField = document.getElementById("articleSlug");
